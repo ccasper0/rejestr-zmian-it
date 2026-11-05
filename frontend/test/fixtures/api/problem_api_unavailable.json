@@ -1,0 +1,8 @@
+{
+ "type": "urn:rejestr:problem:api.unavailable",
+ "title": "Usługa niedostępna",
+ "status": 503,
+ "code": "api.unavailable",
+ "detail": "Serwer aplikacji jest chwilowo niedostępny. Spróbuj ponownie za chwilę.",
+ "request_id": "7d0c1d52-31f4-4c1b-8d55-0b3e5b6a9c23"
+}

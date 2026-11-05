@@ -1,0 +1,36 @@
+{
+ "id": "49561563-057e-41f8-867f-711b9384f189",
+ "external_id": "dev-editor",
+ "email": "editor@example.com",
+ "display_name": "Ewa Edytorska",
+ "is_app_admin": false,
+ "memberships": [
+  {
+   "company_id": "86282fd9-8f4f-4ca0-870a-8c0e20c33712",
+   "company_name": "Alfa S.A.",
+   "company_prefix": "ALFA",
+   "company_status": "active",
+   "roles": [
+    "editor"
+   ]
+  },
+  {
+   "company_id": "c328df5a-c841-4834-8449-36196696e958",
+   "company_name": "Beta sp. z o.o.",
+   "company_prefix": "BETA",
+   "company_status": "active",
+   "roles": [
+    "editor"
+   ]
+  },
+  {
+   "company_id": "41901f0c-b5bd-431a-ae20-2a31bc0059a9",
+   "company_name": "Gamma sp. z o.o.",
+   "company_prefix": "GAMMA",
+   "company_status": "active",
+   "roles": [
+    "editor"
+   ]
+  }
+ ]
+}

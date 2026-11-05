@@ -1,0 +1,29 @@
+# Secrets / env
+.env
+*.env.local
+
+# IDE
+.idea/
+*.iml
+.vscode/
+
+# Python
+__pycache__/
+*.py[cod]
+.venv/
+.pytest_cache/
+.mypy_cache/
+.ruff_cache/
+.coverage
+htmlcov/
+
+# Runtime data
+storage/
+*.log
+
+# Backups (scripts/backup.sh, compose profile "backup")
+backups/
+
+# Claude Code local state
+.claude/worktrees/
+.claude/settings.local.json

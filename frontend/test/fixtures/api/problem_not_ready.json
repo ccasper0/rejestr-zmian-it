@@ -1,0 +1,175 @@
+{
+ "fields": [
+  "window_start"
+ ],
+ "checks": [
+  {
+   "code": "title.required",
+   "ok": true,
+   "level": "ok",
+   "message_pl": "Tytuł zmiany jest podany.",
+   "field": "title"
+  },
+  {
+   "code": "change_type.required",
+   "ok": true,
+   "level": "ok",
+   "message_pl": "Typ zmiany jest wybrany (standardowa, normalna lub awaryjna).",
+   "field": "change_type"
+  },
+  {
+   "code": "risk.required",
+   "ok": true,
+   "level": "ok",
+   "message_pl": "Ryzyko jest określone.",
+   "field": "risk"
+  },
+  {
+   "code": "description.required",
+   "ok": true,
+   "level": "ok",
+   "message_pl": "Opis zmiany i uzasadnienie są podane.",
+   "field": "description"
+  },
+  {
+   "code": "implementation_plan.required",
+   "ok": true,
+   "level": "ok",
+   "message_pl": "Plan wdrożenia jest podany.",
+   "field": "implementation_plan"
+  },
+  {
+   "code": "category.required",
+   "ok": true,
+   "level": "ok",
+   "message_pl": "Kategoria zmiany jest wybrana.",
+   "field": "category_id"
+  },
+  {
+   "code": "category.available",
+   "ok": true,
+   "level": "ok",
+   "message_pl": "Kategoria jest aktywna i dostępna w tej spółce.",
+   "field": "category_id"
+  },
+  {
+   "code": "subcategory.valid",
+   "ok": true,
+   "level": "ok",
+   "message_pl": "Podkategoria jest aktywna i należy do wybranej kategorii.",
+   "field": "subcategory_id"
+  },
+  {
+   "code": "ci.required",
+   "ok": true,
+   "level": "ok",
+   "message_pl": "Wskazano co najmniej jeden obiekt (CI), którego dotyczy zmiana.",
+   "field": "ci_ids"
+  },
+  {
+   "code": "ci.same_company",
+   "ok": true,
+   "level": "ok",
+   "message_pl": "Wszystkie obiekty (CI) należą do spółki zmiany.",
+   "field": "ci_ids"
+  },
+  {
+   "code": "ci.active",
+   "ok": true,
+   "level": "ok",
+   "message_pl": "Wszystkie obiekty (CI) są aktywne.",
+   "field": "ci_ids"
+  },
+  {
+   "code": "rollback_plan.required_high_risk",
+   "ok": true,
+   "level": "ok",
+   "message_pl": "Plan wycofania jest podany - wymagany przy wysokim ryzyku.",
+   "field": "rollback_plan"
+  },
+  {
+   "code": "window.required_high_risk",
+   "ok": true,
+   "level": "ok",
+   "message_pl": "Okno serwisowe (od i do) jest podane - wymagane przy wysokim ryzyku.",
+   "field": "window_start"
+  },
+  {
+   "code": "window.order",
+   "ok": true,
+   "level": "ok",
+   "message_pl": "Początek okna serwisowego jest wcześniejszy niż jego koniec.",
+   "field": "window_end"
+  },
+  {
+   "code": "window.future",
+   "ok": false,
+   "level": "error",
+   "message_pl": "Początek okna serwisowego jest w przyszłości.",
+   "field": "window_start"
+  },
+  {
+   "code": "assignee.required",
+   "ok": true,
+   "level": "ok",
+   "message_pl": "Wykonawca jest wskazany.",
+   "field": "assignee_id"
+  },
+  {
+   "code": "assignee.eligible",
+   "ok": true,
+   "level": "ok",
+   "message_pl": "Wykonawca jest aktywnym użytkownikiem z rolą edytora lub zatwierdzającego w spółce.",
+   "field": "assignee_id"
+  },
+  {
+   "code": "approver.required",
+   "ok": true,
+   "level": "ok",
+   "message_pl": "Zatwierdzający jest wskazany.",
+   "field": "approver_id"
+  },
+  {
+   "code": "approver.eligible",
+   "ok": true,
+   "level": "ok",
+   "message_pl": "Zatwierdzający jest aktywnym użytkownikiem z rolą zatwierdzającego w spółce.",
+   "field": "approver_id"
+  },
+  {
+   "code": "approver.four_eyes",
+   "ok": true,
+   "level": "ok",
+   "message_pl": "Zatwierdzający jest inną osobą niż zgłaszający i wykonawca (zasada czterech oczu).",
+   "field": "approver_id"
+  },
+  {
+   "code": "requirement_ref.required_ksc",
+   "ok": true,
+   "level": "ok",
+   "message_pl": "Podstawa/wymóg jest podany - wymagany w podmiocie objętym uoKSC.",
+   "field": "requirement_ref"
+  },
+  {
+   "code": "verifier.required_ksc",
+   "ok": true,
+   "level": "ok",
+   "message_pl": "Weryfikujący jest wskazany - wymagany w podmiocie objętym uoKSC.",
+   "field": "verifier_id"
+  },
+  {
+   "code": "verifier.eligible",
+   "ok": true,
+   "level": "ok",
+   "message_pl": "Weryfikujący jest aktywnym użytkownikiem z rolą edytora lub zatwierdzającego w spółce.",
+   "field": "verifier_id"
+  }
+ ],
+ "type": "urn:rejestr:problem:change.not_ready",
+ "title": "Nieprawidłowe dane",
+ "status": 422,
+ "detail": "Zmiana nie spełnia warunków wysłania. Popraw pozycje oznaczone w kontroli przed wysłaniem.",
+ "code": "change.not_ready",
+ "instance": "/api/v1/companies/86282fd9-8f4f-4ca0-870a-8c0e20c33712/changes/4a5096c0-b9e3-403e-9c83-6bb701778848/actions/submit",
+ "request_id": "48743cae-720c-41c1-8418-9f23561bc9a0"
+}

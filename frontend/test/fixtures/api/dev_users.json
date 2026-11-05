@@ -1,0 +1,37 @@
+[
+ {
+  "external_id": "dev-admin",
+  "display_name": "Adam Administrator",
+  "email": "admin@example.com",
+  "is_app_admin": true,
+  "is_active": true
+ },
+ {
+  "external_id": "dev-auditor",
+  "display_name": "Alicja Audytorka",
+  "email": "auditor@example.com",
+  "is_app_admin": false,
+  "is_active": true
+ },
+ {
+  "external_id": "dev-editor",
+  "display_name": "Ewa Edytorska",
+  "email": "editor@example.com",
+  "is_app_admin": false,
+  "is_active": true
+ },
+ {
+  "external_id": "dev-approver",
+  "display_name": "Jan Zatwierdzający",
+  "email": "approver@example.com",
+  "is_app_admin": false,
+  "is_active": true
+ },
+ {
+  "external_id": "dev-viewer",
+  "display_name": "Piotr Przeglądający",
+  "email": "viewer@example.com",
+  "is_app_admin": false,
+  "is_active": true
+ }
+]

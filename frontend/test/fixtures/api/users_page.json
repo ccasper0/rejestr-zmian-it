@@ -1,0 +1,57 @@
+{
+ "items": [
+  {
+   "id": "ce62f7b9-d384-4c11-bdd3-66f13d856302",
+   "external_id": "dev-admin",
+   "email": "admin@example.com",
+   "display_name": "Adam Administrator",
+   "is_app_admin": true,
+   "is_active": true,
+   "created_at": "2026-10-30T05:55:57.818317Z",
+   "updated_at": "2026-10-30T05:55:57.818317Z"
+  },
+  {
+   "id": "5dfa3249-5bac-40c3-ab42-8b3d05938568",
+   "external_id": "dev-auditor",
+   "email": "auditor@example.com",
+   "display_name": "Alicja Audytorka",
+   "is_app_admin": false,
+   "is_active": true,
+   "created_at": "2026-10-30T05:55:57.818317Z",
+   "updated_at": "2026-10-30T05:55:57.818317Z"
+  },
+  {
+   "id": "49561563-057e-41f8-867f-711b9384f189",
+   "external_id": "dev-editor",
+   "email": "editor@example.com",
+   "display_name": "Ewa Edytorska",
+   "is_app_admin": false,
+   "is_active": true,
+   "created_at": "2026-10-30T05:55:57.818317Z",
+   "updated_at": "2026-10-30T05:55:57.818317Z"
+  },
+  {
+   "id": "ece4b2f9-0e39-472a-825e-3cc76b6885bd",
+   "external_id": "dev-approver",
+   "email": "approver@example.com",
+   "display_name": "Jan Zatwierdzający",
+   "is_app_admin": false,
+   "is_active": true,
+   "created_at": "2026-10-30T05:55:57.818317Z",
+   "updated_at": "2026-10-30T05:55:57.818317Z"
+  },
+  {
+   "id": "d9736785-8baf-443b-8570-f1250a381a59",
+   "external_id": "dev-viewer",
+   "email": "viewer@example.com",
+   "display_name": "Piotr Przeglądający",
+   "is_app_admin": false,
+   "is_active": true,
+   "created_at": "2026-10-30T05:55:57.818317Z",
+   "updated_at": "2026-10-30T05:55:57.818317Z"
+  }
+ ],
+ "total": 5,
+ "limit": 5,
+ "offset": 0
+}

@@ -1,0 +1,21 @@
+# CI-only compose override (GitHub Actions): BuildKit layer cache in the
+# GitHub Actions cache backend (type=gha). Requires a docker-container buildx
+# builder (docker/setup-buildx-action) and the ACTIONS_* runtime variables
+# (crazy-max/ghaction-github-runtime). Not meant for local use.
+#
+#   docker compose -f docker-compose.yml -f deploy/ci/docker-compose.ci.yml up -d --build --wait
+#
+# cache_to uses ignore-error=true so a cache backend hiccup never fails CI.
+services:
+  migrate:
+    build:
+      cache_from:
+        - type=gha,scope=rejestr-backend
+      cache_to:
+        - type=gha,scope=rejestr-backend,mode=max,ignore-error=true
+  web:
+    build:
+      cache_from:
+        - type=gha,scope=rejestr-web
+      cache_to:
+        - type=gha,scope=rejestr-web,mode=max,ignore-error=true

@@ -1,0 +1,353 @@
+{
+ "items": [
+  {
+   "seq": 72,
+   "occurred_at": "2026-10-30T06:25:11.285008Z",
+   "actor_id": "49561563-057e-41f8-867f-711b9384f189",
+   "actor_display": "Ewa Edytorska",
+   "actor_roles": [
+    "editor"
+   ],
+   "ip_address": "172.28.0.1",
+   "request_id": "6d03e263-9681-4a2a-a653-f3b2c90c11ee",
+   "entity_type": "change",
+   "entity_id": "e41ce831-5253-4e52-bd0f-31059e6c686f",
+   "action": "create",
+   "diff": {
+    "ci_ids": {
+     "after": [],
+     "before": null
+    },
+    "number": {
+     "after": "CHG-ALFA-2026-0017",
+     "before": null
+    },
+    "status": {
+     "after": "draft",
+     "before": null
+    },
+    "approver_id": {
+     "after": "ece4b2f9-0e39-472a-825e-3cc76b6885bd",
+     "before": null
+    },
+    "requested_by_id": {
+     "after": "49561563-057e-41f8-867f-711b9384f189",
+     "before": null
+    }
+   },
+   "context": {
+    "number": "CHG-ALFA-2026-0017",
+    "status": "draft",
+    "version": 1
+   },
+   "prev_hash": "e85813ce293f3b680a1833a2b4140f84c58d849c42bd4f1a53d3a0eeb0bae389",
+   "hash": "56f477cf0f84b46ea0441a0cac7433c9a35dbe363305835b903706f1948177db",
+   "hash_valid": true
+  },
+  {
+   "seq": 73,
+   "occurred_at": "2026-10-30T06:25:17.406267Z",
+   "actor_id": "49561563-057e-41f8-867f-711b9384f189",
+   "actor_display": "Ewa Edytorska",
+   "actor_roles": [
+    "editor"
+   ],
+   "ip_address": "172.28.0.1",
+   "request_id": "1c5d9777-b019-44e9-a443-c5ca1a2b1f30",
+   "entity_type": "change",
+   "entity_id": "e41ce831-5253-4e52-bd0f-31059e6c686f",
+   "action": "update",
+   "diff": {
+    "risk": {
+     "after": "high",
+     "before": null
+    },
+    "title": {
+     "after": "E2E: reguła zapory dla serwera WWW",
+     "before": null
+    },
+    "ci_ids": {
+     "after": [
+      "b3063a93-a6bb-4d56-9d14-be44d33858f7"
+     ],
+     "before": []
+    },
+    "ticket_ref": {
+     "after": "SD-E2E",
+     "before": null
+    },
+    "window_end": {
+     "after": "2026-11-01T08:25:15.338753Z",
+     "before": null
+    },
+    "assignee_id": {
+     "after": "49561563-057e-41f8-867f-711b9384f189",
+     "before": null
+    },
+    "category_id": {
+     "after": "f27360a6-7333-476a-b47b-a541c5dcbe8c",
+     "before": null
+    },
+    "change_type": {
+     "after": "normal",
+     "before": null
+    },
+    "description": {
+     "after": "Otwarcie portu 443 — test scenariusza E2E.",
+     "before": null
+    },
+    "verifier_id": {
+     "after": "ece4b2f9-0e39-472a-825e-3cc76b6885bd",
+     "before": null
+    },
+    "window_start": {
+     "after": "2026-11-01T06:25:15.338753Z",
+     "before": null
+    },
+    "requirement_ref": {
+     "after": "ISO/IEC 27001:2022 A.8.32",
+     "before": null
+    },
+    "implementation_plan": {
+     "after": "1. Kopia konfiguracji. 2. Reguła. 3. Test.",
+     "before": null
+    }
+   },
+   "context": {
+    "number": "CHG-ALFA-2026-0017",
+    "status": "draft",
+    "version": 2
+   },
+   "prev_hash": "56f477cf0f84b46ea0441a0cac7433c9a35dbe363305835b903706f1948177db",
+   "hash": "32ab059009055d8aeb0f786fabafa0bfdb66eda3abd550e7dfda6283df1631aa",
+   "hash_valid": true
+  },
+  {
+   "seq": 74,
+   "occurred_at": "2026-10-30T06:25:25.537204Z",
+   "actor_id": "49561563-057e-41f8-867f-711b9384f189",
+   "actor_display": "Ewa Edytorska",
+   "actor_roles": [
+    "editor"
+   ],
+   "ip_address": "172.28.0.1",
+   "request_id": "11e614ed-8caa-4f5b-903b-6eb594a8734b",
+   "entity_type": "change",
+   "entity_id": "e41ce831-5253-4e52-bd0f-31059e6c686f",
+   "action": "update",
+   "diff": {
+    "rollback_plan": {
+     "after": "Przywrócenie kopii konfiguracji.",
+     "before": null
+    }
+   },
+   "context": {
+    "number": "CHG-ALFA-2026-0017",
+    "status": "draft",
+    "version": 3
+   },
+   "prev_hash": "32ab059009055d8aeb0f786fabafa0bfdb66eda3abd550e7dfda6283df1631aa",
+   "hash": "4f1b742027755c742e2fd8efdaa1ae07ccaaf0d98f8db2b7a53426d6b2aac804",
+   "hash_valid": true
+  },
+  {
+   "seq": 75,
+   "occurred_at": "2026-10-30T06:25:27.580474Z",
+   "actor_id": "49561563-057e-41f8-867f-711b9384f189",
+   "actor_display": "Ewa Edytorska",
+   "actor_roles": [
+    "editor"
+   ],
+   "ip_address": "172.28.0.1",
+   "request_id": "6256281c-a6cb-4f59-b418-cf5def8ffc7e",
+   "entity_type": "change",
+   "entity_id": "e41ce831-5253-4e52-bd0f-31059e6c686f",
+   "action": "transition",
+   "diff": {
+    "status": {
+     "after": "pending_approval",
+     "before": "draft"
+    }
+   },
+   "context": {
+    "action": "submit",
+    "number": "CHG-ALFA-2026-0017",
+    "version": 4,
+    "to_status": "pending_approval",
+    "from_status": "draft"
+   },
+   "prev_hash": "4f1b742027755c742e2fd8efdaa1ae07ccaaf0d98f8db2b7a53426d6b2aac804",
+   "hash": "c4a2cbc202edadc7099b1af6af0b1cf38f44c185bb1a4c3d36c9abb38c22875d",
+   "hash_valid": true
+  },
+  {
+   "seq": 76,
+   "occurred_at": "2026-10-30T06:25:33.796600Z",
+   "actor_id": "ece4b2f9-0e39-472a-825e-3cc76b6885bd",
+   "actor_display": "Jan Zatwierdzający",
+   "actor_roles": [
+    "approver"
+   ],
+   "ip_address": "172.28.0.1",
+   "request_id": "847d06ae-157d-478c-9bf7-92c03f4341c4",
+   "entity_type": "change",
+   "entity_id": "e41ce831-5253-4e52-bd0f-31059e6c686f",
+   "action": "transition",
+   "diff": {
+    "status": {
+     "after": "approved",
+     "before": "pending_approval"
+    },
+    "approved_at": {
+     "after": "2026-10-30T06:25:33.785598Z",
+     "before": null
+    },
+    "approved_by_id": {
+     "after": "ece4b2f9-0e39-472a-825e-3cc76b6885bd",
+     "before": null
+    }
+   },
+   "context": {
+    "action": "approve",
+    "number": "CHG-ALFA-2026-0017",
+    "comment": "Zatwierdzam.",
+    "version": 5,
+    "to_status": "approved",
+    "comment_id": "1f738faa-c877-4545-a411-54a802305028",
+    "from_status": "pending_approval"
+   },
+   "prev_hash": "c4a2cbc202edadc7099b1af6af0b1cf38f44c185bb1a4c3d36c9abb38c22875d",
+   "hash": "856d7db864aa5c970c9d587f91ed4b4d3a25cc0ce418fe6760c42b1036f83157",
+   "hash_valid": true
+  },
+  {
+   "seq": 77,
+   "occurred_at": "2026-10-30T06:25:37.878990Z",
+   "actor_id": "49561563-057e-41f8-867f-711b9384f189",
+   "actor_display": "Ewa Edytorska",
+   "actor_roles": [
+    "editor"
+   ],
+   "ip_address": "172.28.0.1",
+   "request_id": "71fff9f8-e32e-46ec-bfcc-42cee09e565e",
+   "entity_type": "change",
+   "entity_id": "e41ce831-5253-4e52-bd0f-31059e6c686f",
+   "action": "transition",
+   "diff": {
+    "status": {
+     "after": "implemented",
+     "before": "approved"
+    },
+    "implemented_at": {
+     "after": "2026-10-30T06:25:37.868088Z",
+     "before": null
+    }
+   },
+   "context": {
+    "action": "implement",
+    "number": "CHG-ALFA-2026-0017",
+    "version": 6,
+    "warnings": [
+     {
+      "code": "implementation.outside_window",
+      "message_pl": "Zmianę wdrożono poza zatwierdzonym oknem serwisowym - odstępstwo."
+     }
+    ],
+    "to_status": "implemented",
+    "from_status": "approved"
+   },
+   "prev_hash": "856d7db864aa5c970c9d587f91ed4b4d3a25cc0ce418fe6760c42b1036f83157",
+   "hash": "de9b148364cdcc6e22657ca3bafabd59cf96f2bcea35260dce8ebf5a20054382",
+   "hash_valid": true
+  },
+  {
+   "seq": 78,
+   "occurred_at": "2026-10-30T06:25:41.975302Z",
+   "actor_id": "ece4b2f9-0e39-472a-825e-3cc76b6885bd",
+   "actor_display": "Jan Zatwierdzający",
+   "actor_roles": [
+    "approver"
+   ],
+   "ip_address": "172.28.0.1",
+   "request_id": "188c7cca-5a1f-44c6-b92e-0f340324b565",
+   "entity_type": "change",
+   "entity_id": "e41ce831-5253-4e52-bd0f-31059e6c686f",
+   "action": "transition",
+   "diff": {
+    "status": {
+     "after": "verified",
+     "before": "implemented"
+    },
+    "verified_at": {
+     "after": "2026-10-30T06:25:41.966676Z",
+     "before": null
+    }
+   },
+   "context": {
+    "action": "verify",
+    "number": "CHG-ALFA-2026-0017",
+    "version": 7,
+    "to_status": "verified",
+    "from_status": "implemented"
+   },
+   "prev_hash": "de9b148364cdcc6e22657ca3bafabd59cf96f2bcea35260dce8ebf5a20054382",
+   "hash": "351a30c72c3cc43a094ea7fa12f97ff5d8e2d75d58ea6858ea3a2a6030d54113",
+   "hash_valid": true
+  },
+  {
+   "seq": 79,
+   "occurred_at": "2026-10-30T07:03:23.898160Z",
+   "actor_id": "49561563-057e-41f8-867f-711b9384f189",
+   "actor_display": "Ewa Edytorska",
+   "actor_roles": [
+    "editor"
+   ],
+   "ip_address": "172.28.0.1",
+   "request_id": "a1ed20cc-2bc6-4a8a-9f77-75d3c2df9335",
+   "entity_type": "attachment",
+   "entity_id": "d374c43f-3e25-422f-a513-dc88f5df6827",
+   "action": "attach",
+   "diff": {},
+   "context": {
+    "size": 44,
+    "number": "CHG-ALFA-2026-0017",
+    "sha256": "e668f00ed4f72da28ea3cb09611c5be68405b030366517806f01a39752dbd93d",
+    "filename": "protokol.txt",
+    "change_id": "e41ce831-5253-4e52-bd0f-31059e6c686f",
+    "content_type": "text/plain"
+   },
+   "prev_hash": "351a30c72c3cc43a094ea7fa12f97ff5d8e2d75d58ea6858ea3a2a6030d54113",
+   "hash": "ed5d8dd73b7b74c5abecd562d270c1aca2f77111f337fd5a90076e45e06610af",
+   "hash_valid": true
+  },
+  {
+   "seq": 82,
+   "occurred_at": "2026-10-30T07:06:43.724550Z",
+   "actor_id": "49561563-057e-41f8-867f-711b9384f189",
+   "actor_display": "Ewa Edytorska",
+   "actor_roles": [
+    "editor"
+   ],
+   "ip_address": "172.28.0.1",
+   "request_id": "2e1c4e0e-4ae6-4b3f-85e6-a1be6e64c4de",
+   "entity_type": "attachment",
+   "entity_id": "51b6da77-2fa8-45ee-9216-31e11c980c09",
+   "action": "attach",
+   "diff": {},
+   "context": {
+    "size": 44,
+    "number": "CHG-ALFA-2026-0017",
+    "sha256": "e668f00ed4f72da28ea3cb09611c5be68405b030366517806f01a39752dbd93d",
+    "filename": "protokol.txt",
+    "change_id": "e41ce831-5253-4e52-bd0f-31059e6c686f",
+    "content_type": "text/plain"
+   },
+   "prev_hash": "c789e5fe94b29e66dbf24df4b1205f472095a3b87b0cba6bea3dd871eef1e0d5",
+   "hash": "ec6470a8a1981f618daf7bf430f617ae0b91adc583585d1555142fe0933184da",
+   "hash_valid": true
+  }
+ ],
+ "total": 9,
+ "limit": 100,
+ "offset": 0
+}

@@ -1,0 +1,55 @@
+{
+ "items": [
+  {
+   "id": "b0a857b3-5cff-423a-a8c8-783de329b3ca",
+   "code": "SRV-DECOM",
+   "name": "Wyłączenie",
+   "parent_id": "bb1d09e5-eff7-4047-b8e9-d7be644b027e",
+   "requires_approval": true,
+   "requires_ci_owner_consent": false,
+   "default_risk": "medium",
+   "is_active": true,
+   "created_at": "2026-10-30T05:55:57.934354Z",
+   "updated_at": "2026-10-30T05:55:57.934354Z"
+  },
+  {
+   "id": "b69929b1-0c01-4c44-b909-51fbfe279c77",
+   "code": "SRV-MIGR",
+   "name": "Migracja",
+   "parent_id": "bb1d09e5-eff7-4047-b8e9-d7be644b027e",
+   "requires_approval": true,
+   "requires_ci_owner_consent": false,
+   "default_risk": "medium",
+   "is_active": true,
+   "created_at": "2026-10-30T05:55:57.934354Z",
+   "updated_at": "2026-10-30T05:55:57.934354Z"
+  },
+  {
+   "id": "08fd92c1-e472-4127-9156-a97ac37a02bc",
+   "code": "SRV-NEW",
+   "name": "Nowy serwer / VM",
+   "parent_id": "bb1d09e5-eff7-4047-b8e9-d7be644b027e",
+   "requires_approval": true,
+   "requires_ci_owner_consent": false,
+   "default_risk": "medium",
+   "is_active": true,
+   "created_at": "2026-10-30T05:55:57.934354Z",
+   "updated_at": "2026-10-30T05:55:57.934354Z"
+  },
+  {
+   "id": "68d5cb2b-596d-421d-aff1-f7781d081a1c",
+   "code": "SRV-RES",
+   "name": "Zasoby",
+   "parent_id": "bb1d09e5-eff7-4047-b8e9-d7be644b027e",
+   "requires_approval": true,
+   "requires_ci_owner_consent": false,
+   "default_risk": "medium",
+   "is_active": true,
+   "created_at": "2026-10-30T05:55:57.934354Z",
+   "updated_at": "2026-10-30T05:55:57.934354Z"
+  }
+ ],
+ "total": 4,
+ "limit": 100,
+ "offset": 0
+}

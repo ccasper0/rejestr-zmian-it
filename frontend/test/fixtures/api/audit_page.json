@@ -1,0 +1,361 @@
+{
+ "items": [
+  {
+   "id": 296,
+   "company_id": "86282fd9-8f4f-4ca0-870a-8c0e20c33712",
+   "seq": 100,
+   "occurred_at": "2026-10-30T10:56:58.266098Z",
+   "actor_id": "ece4b2f9-0e39-472a-825e-3cc76b6885bd",
+   "actor_display": "Jan Zatwierdzający",
+   "actor_roles": [
+    "approver"
+   ],
+   "ip_address": "172.28.0.1",
+   "user_agent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/156.0.0.0 Safari/537.36",
+   "request_id": "98590e29-b71c-3445-801b-a7944c960047",
+   "entity_type": "change",
+   "entity_id": "4b3c9b3c-3fce-41ad-8556-21eb0b603be7",
+   "action": "transition",
+   "diff": {
+    "status": {
+     "after": "verified",
+     "before": "implemented"
+    },
+    "verified_at": {
+     "after": "2026-10-30T10:56:58.255691Z",
+     "before": null
+    }
+   },
+   "context": {
+    "action": "verify",
+    "number": "CHG-ALFA-2026-0021",
+    "version": 13,
+    "to_status": "verified",
+    "from_status": "implemented"
+   },
+   "prev_hash": "aba010060a72e86674175b1098bafdf2e99003401f85b7e83cd29e2b36c38942",
+   "hash": "94c6631a16e39827c712aac4a1abd7188ab0104982412511bb1b5f03f9329d70"
+  },
+  {
+   "id": 294,
+   "company_id": "86282fd9-8f4f-4ca0-870a-8c0e20c33712",
+   "seq": 99,
+   "occurred_at": "2026-10-30T10:56:06.577995Z",
+   "actor_id": "49561563-057e-41f8-867f-711b9384f189",
+   "actor_display": "Ewa Edytorska",
+   "actor_roles": [
+    "editor"
+   ],
+   "ip_address": "172.28.0.1",
+   "user_agent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/156.0.0.0 Safari/537.36",
+   "request_id": "0bdc4978-d990-44ad-a713-30b564ddeacd",
+   "entity_type": "change",
+   "entity_id": "4b3c9b3c-3fce-41ad-8556-21eb0b603be7",
+   "action": "transition",
+   "diff": {
+    "status": {
+     "after": "implemented",
+     "before": "approved"
+    },
+    "implemented_at": {
+     "after": "2026-10-30T10:56:06.564297Z",
+     "before": null
+    }
+   },
+   "context": {
+    "action": "implement",
+    "number": "CHG-ALFA-2026-0021",
+    "version": 12,
+    "warnings": [
+     {
+      "code": "implementation.outside_window",
+      "message_pl": "Zmianę wdrożono poza zatwierdzonym oknem serwisowym - odstępstwo."
+     }
+    ],
+    "to_status": "implemented",
+    "from_status": "approved"
+   },
+   "prev_hash": "5dc007985b5b41e0c835535c6d0641cc1cf6708308308648f8667f7975468b07",
+   "hash": "aba010060a72e86674175b1098bafdf2e99003401f85b7e83cd29e2b36c38942"
+  },
+  {
+   "id": 292,
+   "company_id": "86282fd9-8f4f-4ca0-870a-8c0e20c33712",
+   "seq": 98,
+   "occurred_at": "2026-10-30T10:55:26.007744Z",
+   "actor_id": "ece4b2f9-0e39-472a-825e-3cc76b6885bd",
+   "actor_display": "Jan Zatwierdzający",
+   "actor_roles": [
+    "approver"
+   ],
+   "ip_address": "172.28.0.1",
+   "user_agent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/156.0.0.0 Safari/537.36",
+   "request_id": "a407f7d3-825e-8f7b-0582-bfcf38125319",
+   "entity_type": "change",
+   "entity_id": "4b3c9b3c-3fce-41ad-8556-21eb0b603be7",
+   "action": "transition",
+   "diff": {
+    "status": {
+     "after": "approved",
+     "before": "pending_approval"
+    },
+    "approved_at": {
+     "after": "2026-10-30T10:55:25.995263Z",
+     "before": null
+    },
+    "approved_by_id": {
+     "after": "ece4b2f9-0e39-472a-825e-3cc76b6885bd",
+     "before": null
+    }
+   },
+   "context": {
+    "action": "approve",
+    "number": "CHG-ALFA-2026-0021",
+    "comment": "Zatwierdzam - test akceptacyjny Etapu 5.",
+    "version": 11,
+    "to_status": "approved",
+    "comment_id": "de13cb34-c386-4b47-a272-323086d656a3",
+    "from_status": "pending_approval"
+   },
+   "prev_hash": "8099e7f98064673c1aba6006e5b07631b1ce6c5f34692f5c3089a24321ccc0dc",
+   "hash": "5dc007985b5b41e0c835535c6d0641cc1cf6708308308648f8667f7975468b07"
+  },
+  {
+   "id": 290,
+   "company_id": "86282fd9-8f4f-4ca0-870a-8c0e20c33712",
+   "seq": 97,
+   "occurred_at": "2026-10-30T10:54:26.958842Z",
+   "actor_id": "49561563-057e-41f8-867f-711b9384f189",
+   "actor_display": "Ewa Edytorska",
+   "actor_roles": [
+    "editor"
+   ],
+   "ip_address": "172.28.0.1",
+   "user_agent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/156.0.0.0 Safari/537.36",
+   "request_id": "fc10ba46-f8b7-2343-3124-931f465c7378",
+   "entity_type": "change",
+   "entity_id": "4b3c9b3c-3fce-41ad-8556-21eb0b603be7",
+   "action": "transition",
+   "diff": {
+    "status": {
+     "after": "pending_approval",
+     "before": "draft"
+    }
+   },
+   "context": {
+    "action": "submit",
+    "number": "CHG-ALFA-2026-0021",
+    "version": 10,
+    "to_status": "pending_approval",
+    "from_status": "draft"
+   },
+   "prev_hash": "7d252035295e903ef52ce42032c12f21d5e915395b8e341ad061fb517a4ce5a2",
+   "hash": "8099e7f98064673c1aba6006e5b07631b1ce6c5f34692f5c3089a24321ccc0dc"
+  },
+  {
+   "id": 289,
+   "company_id": "86282fd9-8f4f-4ca0-870a-8c0e20c33712",
+   "seq": 96,
+   "occurred_at": "2026-10-30T10:54:02.634160Z",
+   "actor_id": "49561563-057e-41f8-867f-711b9384f189",
+   "actor_display": "Ewa Edytorska",
+   "actor_roles": [
+    "editor"
+   ],
+   "ip_address": "172.28.0.1",
+   "user_agent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/156.0.0.0 Safari/537.36",
+   "request_id": "61bd1aee-3364-5b53-027a-eb7b8a6e6cd2",
+   "entity_type": "change",
+   "entity_id": "4b3c9b3c-3fce-41ad-8556-21eb0b603be7",
+   "action": "update",
+   "diff": {
+    "window_end": {
+     "after": "2026-10-31T12:53:00.000000Z",
+     "before": null
+    }
+   },
+   "context": {
+    "number": "CHG-ALFA-2026-0021",
+    "status": "draft",
+    "version": 9
+   },
+   "prev_hash": "edba1ac610f3ff1cbc841f2115d99dfa84033a96c41ffa154771d6d39574f472",
+   "hash": "7d252035295e903ef52ce42032c12f21d5e915395b8e341ad061fb517a4ce5a2"
+  },
+  {
+   "id": 288,
+   "company_id": "86282fd9-8f4f-4ca0-870a-8c0e20c33712",
+   "seq": 95,
+   "occurred_at": "2026-10-30T10:53:40.681729Z",
+   "actor_id": "49561563-057e-41f8-867f-711b9384f189",
+   "actor_display": "Ewa Edytorska",
+   "actor_roles": [
+    "editor"
+   ],
+   "ip_address": "172.28.0.1",
+   "user_agent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/156.0.0.0 Safari/537.36",
+   "request_id": "9c65789a-8766-b768-6ca5-b00d7f4a1cfb",
+   "entity_type": "change",
+   "entity_id": "4b3c9b3c-3fce-41ad-8556-21eb0b603be7",
+   "action": "update",
+   "diff": {
+    "verifier_id": {
+     "after": "ece4b2f9-0e39-472a-825e-3cc76b6885bd",
+     "before": null
+    },
+    "window_start": {
+     "after": "2026-10-31T10:53:00.000000Z",
+     "before": null
+    },
+    "requirement_ref": {
+     "after": "ISO/IEC 27001:2022 A.8.32",
+     "before": null
+    }
+   },
+   "context": {
+    "number": "CHG-ALFA-2026-0021",
+    "status": "draft",
+    "version": 8
+   },
+   "prev_hash": "a6573292c96b47af40403cdd9c694248cd009ab39dca0eadf6fb929586bbd7a2",
+   "hash": "edba1ac610f3ff1cbc841f2115d99dfa84033a96c41ffa154771d6d39574f472"
+  },
+  {
+   "id": 287,
+   "company_id": "86282fd9-8f4f-4ca0-870a-8c0e20c33712",
+   "seq": 94,
+   "occurred_at": "2026-10-30T10:53:10.683606Z",
+   "actor_id": "49561563-057e-41f8-867f-711b9384f189",
+   "actor_display": "Ewa Edytorska",
+   "actor_roles": [
+    "editor"
+   ],
+   "ip_address": "172.28.0.1",
+   "user_agent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/156.0.0.0 Safari/537.36",
+   "request_id": "a554f867-3d50-9b3f-1b05-4becce70321a",
+   "entity_type": "change",
+   "entity_id": "4b3c9b3c-3fce-41ad-8556-21eb0b603be7",
+   "action": "update",
+   "diff": {
+    "assignee_id": {
+     "after": "49561563-057e-41f8-867f-711b9384f189",
+     "before": null
+    }
+   },
+   "context": {
+    "number": "CHG-ALFA-2026-0021",
+    "status": "draft",
+    "version": 7
+   },
+   "prev_hash": "5cbb9912ad9ff29b642921950d7f5a03e0cf3e3292d9ce7ddc4ad007cd6f70b6",
+   "hash": "a6573292c96b47af40403cdd9c694248cd009ab39dca0eadf6fb929586bbd7a2"
+  },
+  {
+   "id": 286,
+   "company_id": "86282fd9-8f4f-4ca0-870a-8c0e20c33712",
+   "seq": 93,
+   "occurred_at": "2026-10-30T10:52:40.682557Z",
+   "actor_id": "49561563-057e-41f8-867f-711b9384f189",
+   "actor_display": "Ewa Edytorska",
+   "actor_roles": [
+    "editor"
+   ],
+   "ip_address": "172.28.0.1",
+   "user_agent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/156.0.0.0 Safari/537.36",
+   "request_id": "b228efdc-d97e-eaf7-21a6-cbeb2d82d81c",
+   "entity_type": "change",
+   "entity_id": "4b3c9b3c-3fce-41ad-8556-21eb0b603be7",
+   "action": "update",
+   "diff": {
+    "ci_ids": {
+     "after": [
+      "ef99b3e6-10ae-420c-86d3-e4352a39936f"
+     ],
+     "before": []
+    },
+    "description": {
+     "after": "Dodanie reguly dostepu VPN dla partnera serwisowego.",
+     "before": null
+    },
+    "rollback_plan": {
+     "after": "Usuniecie reguly i przywrocenie kopii konfiguracji.",
+     "before": null
+    },
+    "implementation_plan": {
+     "after": "1. Kopia konfiguracji. 2. Dodanie reguly. 3. Test polaczenia.",
+     "before": null
+    }
+   },
+   "context": {
+    "number": "CHG-ALFA-2026-0021",
+    "status": "draft",
+    "version": 6
+   },
+   "prev_hash": "fe7fe05ddbc76be131280dd333b2eb74b72a6c1023d05396c007ad8719e003cd",
+   "hash": "5cbb9912ad9ff29b642921950d7f5a03e0cf3e3292d9ce7ddc4ad007cd6f70b6"
+  },
+  {
+   "id": 285,
+   "company_id": "86282fd9-8f4f-4ca0-870a-8c0e20c33712",
+   "seq": 92,
+   "occurred_at": "2026-10-30T10:52:10.717924Z",
+   "actor_id": "49561563-057e-41f8-867f-711b9384f189",
+   "actor_display": "Ewa Edytorska",
+   "actor_roles": [
+    "editor"
+   ],
+   "ip_address": "172.28.0.1",
+   "user_agent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/156.0.0.0 Safari/537.36",
+   "request_id": "a7a64fe2-4d3a-171f-a67c-fdaa457f5eee",
+   "entity_type": "change",
+   "entity_id": "4b3c9b3c-3fce-41ad-8556-21eb0b603be7",
+   "action": "update",
+   "diff": {
+    "category_id": {
+     "after": "f27360a6-7333-476a-b47b-a541c5dcbe8c",
+     "before": "5b65f1dc-1ff9-4381-b4b9-e638fc884712"
+    }
+   },
+   "context": {
+    "number": "CHG-ALFA-2026-0021",
+    "status": "draft",
+    "version": 5
+   },
+   "prev_hash": "d353bd405fff3271b89aae1a4e5394630df2d4af82469108b10e28cf996268a3",
+   "hash": "fe7fe05ddbc76be131280dd333b2eb74b72a6c1023d05396c007ad8719e003cd"
+  },
+  {
+   "id": 284,
+   "company_id": "86282fd9-8f4f-4ca0-870a-8c0e20c33712",
+   "seq": 91,
+   "occurred_at": "2026-10-30T08:23:49.575008Z",
+   "actor_id": "49561563-057e-41f8-867f-711b9384f189",
+   "actor_display": "Ewa Edytorska",
+   "actor_roles": [
+    "editor"
+   ],
+   "ip_address": "172.28.0.1",
+   "user_agent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/156.0.0.0 Safari/537.36",
+   "request_id": "e8eaa727-10e8-97de-eb48-4e7571ed2507",
+   "entity_type": "change",
+   "entity_id": "4b3c9b3c-3fce-41ad-8556-21eb0b603be7",
+   "action": "update",
+   "diff": {
+    "category_id": {
+     "after": "5b65f1dc-1ff9-4381-b4b9-e638fc884712",
+     "before": "f27360a6-7333-476a-b47b-a541c5dcbe8c"
+    }
+   },
+   "context": {
+    "number": "CHG-ALFA-2026-0021",
+    "status": "draft",
+    "version": 4
+   },
+   "prev_hash": "995fc4d2b12c300d13198d8023f9bcc4004acc9def5914a9b5eb225935f3f622",
+   "hash": "d353bd405fff3271b89aae1a4e5394630df2d4af82469108b10e28cf996268a3"
+  }
+ ],
+ "total": 100,
+ "limit": 10,
+ "offset": 0
+}

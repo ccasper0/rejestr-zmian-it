@@ -1,0 +1,16 @@
+# Security headers for every response (ADR 0019 §2). Included in EVERY location
+# that sets its own add_header (nginx does not inherit add_header into a location
+# that declares any).
+
+add_header X-Content-Type-Options "nosniff" always;
+add_header Referrer-Policy "same-origin" always;
+add_header X-Frame-Options "DENY" always;
+add_header Cross-Origin-Opener-Policy "same-origin" always;
+add_header Cross-Origin-Resource-Policy "same-origin" always;
+add_header Permissions-Policy "accelerometer=(), camera=(), display-capture=(), geolocation=(), gyroscope=(), magnetometer=(), microphone=(), midi=(), payment=(), serial=(), usb=()" always;
+# HSTS only when the site is served over HTTPS (TLS terminated in front of this
+# container): NGINX_HSTS="max-age=31536000; includeSubDomains". Empty value
+# (default, plain HTTP) = header not sent. $hsts_header (default.conf) is
+# NGINX_HSTS only for requests that arrived over HTTPS according to a trusted
+# proxy's X-Forwarded-Proto - never on plain-HTTP responses.
+add_header Strict-Transport-Security $hsts_header always;

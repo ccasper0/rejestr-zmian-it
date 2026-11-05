@@ -1,0 +1,127 @@
+{
+ "items": [
+  {
+   "id": "c9c27fd0-9098-4fe9-8296-786cc9241053",
+   "code": "ACC",
+   "name": "Konta i uprawnienia",
+   "parent_id": null,
+   "requires_approval": false,
+   "requires_ci_owner_consent": false,
+   "default_risk": "low",
+   "is_active": true,
+   "created_at": "2026-10-30T05:55:57.934354Z",
+   "updated_at": "2026-10-30T05:55:57.934354Z"
+  },
+  {
+   "id": "854fdab4-1051-4400-b9b8-56a613d77db4",
+   "code": "APP",
+   "name": "Aplikacje biznesowe",
+   "parent_id": null,
+   "requires_approval": true,
+   "requires_ci_owner_consent": false,
+   "default_risk": "medium",
+   "is_active": true,
+   "created_at": "2026-10-30T05:55:57.934354Z",
+   "updated_at": "2026-10-30T05:55:57.934354Z"
+  },
+  {
+   "id": "c37bdfac-1fe6-4dc7-ab83-2443882952f7",
+   "code": "BKP",
+   "name": "Kopie zapasowe",
+   "parent_id": null,
+   "requires_approval": true,
+   "requires_ci_owner_consent": false,
+   "default_risk": "low",
+   "is_active": true,
+   "created_at": "2026-10-30T05:55:57.934354Z",
+   "updated_at": "2026-10-30T05:55:57.934354Z"
+  },
+  {
+   "id": "f27360a6-7333-476a-b47b-a541c5dcbe8c",
+   "code": "FW",
+   "name": "Firewall / sieć",
+   "parent_id": null,
+   "requires_approval": true,
+   "requires_ci_owner_consent": false,
+   "default_risk": "medium",
+   "is_active": true,
+   "created_at": "2026-10-30T05:55:57.934354Z",
+   "updated_at": "2026-10-30T05:55:57.934354Z"
+  },
+  {
+   "id": "5b65f1dc-1ff9-4381-b4b9-e638fc884712",
+   "code": "GPO",
+   "name": "Polityki domenowe",
+   "parent_id": null,
+   "requires_approval": true,
+   "requires_ci_owner_consent": false,
+   "default_risk": "medium",
+   "is_active": true,
+   "created_at": "2026-10-30T05:55:57.934354Z",
+   "updated_at": "2026-10-30T05:55:57.934354Z"
+  },
+  {
+   "id": "a63cc13c-c0db-441a-9287-0232a8d368c9",
+   "code": "NET",
+   "name": "Sieć",
+   "parent_id": null,
+   "requires_approval": true,
+   "requires_ci_owner_consent": false,
+   "default_risk": "medium",
+   "is_active": true,
+   "created_at": "2026-10-30T05:55:57.934354Z",
+   "updated_at": "2026-10-30T05:55:57.934354Z"
+  },
+  {
+   "id": "87aef36a-58e3-41d4-99b3-bb6664e06714",
+   "code": "OT",
+   "name": "Systemy OT / przemysłowe",
+   "parent_id": null,
+   "requires_approval": true,
+   "requires_ci_owner_consent": true,
+   "default_risk": "high",
+   "is_active": true,
+   "created_at": "2026-10-30T05:55:57.934354Z",
+   "updated_at": "2026-10-30T05:55:57.934354Z"
+  },
+  {
+   "id": "2ce9cc7b-4905-40e1-9cd0-7a37b8498858",
+   "code": "PATCH",
+   "name": "Aktualizacje i łatki",
+   "parent_id": null,
+   "requires_approval": true,
+   "requires_ci_owner_consent": false,
+   "default_risk": "medium",
+   "is_active": true,
+   "created_at": "2026-10-30T05:55:57.934354Z",
+   "updated_at": "2026-10-30T05:55:57.934354Z"
+  },
+  {
+   "id": "78daffa2-2e13-47c3-aa2f-c6df8b771261",
+   "code": "SEC",
+   "name": "Bezpieczeństwo",
+   "parent_id": null,
+   "requires_approval": true,
+   "requires_ci_owner_consent": false,
+   "default_risk": "medium",
+   "is_active": true,
+   "created_at": "2026-10-30T05:55:57.934354Z",
+   "updated_at": "2026-10-30T05:55:57.934354Z"
+  },
+  {
+   "id": "bb1d09e5-eff7-4047-b8e9-d7be644b027e",
+   "code": "SRV",
+   "name": "Serwery / wirtualizacja",
+   "parent_id": null,
+   "requires_approval": true,
+   "requires_ci_owner_consent": false,
+   "default_risk": "medium",
+   "is_active": true,
+   "created_at": "2026-10-30T05:55:57.934354Z",
+   "updated_at": "2026-10-30T05:55:57.934354Z"
+  }
+ ],
+ "total": 10,
+ "limit": 500,
+ "offset": 0
+}

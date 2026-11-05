@@ -1,0 +1,14 @@
+# Content-Security-Policy of the Flutter web app (ADR 0019 §2).
+#
+# Built with `flutter build web --csp --no-web-resources-cdn` (frontend/Dockerfile):
+#   - CanvasKit (canvaskit.js + .wasm) is served from this origin, not gstatic;
+#   - dart2js output without eval / new Function;
+#   - WebAssembly compilation needs 'wasm-unsafe-eval' (not 'unsafe-eval');
+#   - the engine injects <style> elements and style attributes -> style-src
+#     'unsafe-inline' (styles only; scripts stay 'self');
+#   - fonts / wasm / API calls are fetched -> connect-src 'self';
+#   - fallback fonts (Noto) for glyphs missing in IBM Plex would come from
+#     fonts.gstatic.com - deliberately blocked (no external CDN; Polish is covered).
+# NGINX_CSP_CONNECT_EXTRA: extra connect-src origins, e.g. the API origin when the
+# frontend calls the API on a different origin (WEB_API_URL); empty by default.
+add_header Content-Security-Policy "default-src 'self'; script-src 'self' 'wasm-unsafe-eval'; style-src 'self' 'unsafe-inline'; img-src 'self' data: blob:; font-src 'self' data:; connect-src 'self' ${NGINX_CSP_CONNECT_EXTRA}; worker-src 'self' blob:; manifest-src 'self'; object-src 'none'; frame-src 'none'; base-uri 'self'; form-action 'self'; frame-ancestors 'none'" always;

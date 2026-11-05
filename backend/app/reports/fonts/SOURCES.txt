@@ -1,0 +1,20 @@
+IBM Plex fonts embedded in the PDF reports (CLAUDE.md §9, ADR 0017 §5).
+
+License: SIL Open Font License 1.1 - see OFL.txt (Copyright 2017 IBM Corp., Reserved Font
+Name "Plex"). The files are unmodified copies of the "complete" WOFF builds (full glyph
+set, including all Polish letters) published by IBM on npm:
+
+  @ibm/plex-sans 1.1.0  fonts/complete/woff/IBMPlexSans-{Regular,Italic,Medium,SemiBold,Bold}.woff
+  @ibm/plex-mono 2.5.0  fonts/complete/woff/IBMPlexMono-{Regular,Medium}.woff
+
+downloaded from https://cdn.jsdelivr.net/npm/@ibm/plex-sans@1.1.0/ and
+https://cdn.jsdelivr.net/npm/@ibm/plex-mono@2.5.0/ (mirror of the npm registry).
+
+SHA-256:
+  b731cf56514a4bd711ab2f9acf641f9311707f4386772eb306d25c2b29b73b1a  IBMPlexSans-Regular.woff
+  ed06e0a2cfa973492c7ee61e5f1bf3be7db4d3d5c1551c889ec458ba2972db99  IBMPlexSans-Italic.woff
+  2b6a04d0f593ad57740e0f51c1bf0b1e3f05f27209c7ca1697a0a72973150f3f  IBMPlexSans-Medium.woff
+  fff45f420f0d026b4a39f99b3bfc47dfc06561c598c8db825cfce5fd706bda7a  IBMPlexSans-SemiBold.woff
+  5c8bcd6be12df67acd529819b92f36febeff4df059a9603c4ecd578f01cf4062  IBMPlexSans-Bold.woff
+  3a0d6e1587e8dc784be5a75e1c55b1a5533919b04072a29c750bb29cfe4a4b74  IBMPlexMono-Regular.woff
+  fa311409acb7ee09c9c1564e7ac90306199eb1632bf571a082cf3a1db5f6be98  IBMPlexMono-Medium.woff

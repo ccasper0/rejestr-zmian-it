@@ -1,0 +1,18 @@
+{
+ "user": {
+  "id": "0f6b1c1e-5d7a-4c55-9a4e-2b8f8f0e7a11",
+  "external_id": "local:0f6b1c1e-5d7a-4c55-9a4e-2b8f8f0e7a11",
+  "email": "nowak@example.com",
+  "display_name": "Anna Nowak",
+  "is_app_admin": false,
+  "is_active": true,
+  "created_at": "2026-11-03T08:00:00Z",
+  "updated_at": "2026-11-03T08:00:00Z",
+  "has_password": true,
+  "must_change_password": true,
+  "password_changed_at": "2026-11-03T08:00:00Z",
+  "locked_until": null,
+  "temp_password_expires_at": "2026-11-10T08:00:00Z"
+ },
+ "temporary_password": "k7Pq2-Xm9Rt-Ab3Hz-Wn6Ef"
+}

@@ -1,0 +1,54 @@
+-- Roles and privileges for "Rejestr zmian IT" (CLAUDE.md 6.3).
+--
+-- Single source of truth, used by:
+--   * deploy/postgres/init/10-roles.sh  (docker-entrypoint-initdb.d, empty volume only)
+--   * backend/tests/conftest.py         (testcontainers PostgreSQL, same init path)
+--
+-- The ".psql" extension is deliberate: it is a psql script (uses :'variables'), and the
+-- postgres image entrypoint ignores files that are not *.sh / *.sql[.gz|.xz|.zst], so it
+-- is executed only through 10-roles.sh, which passes the variables.
+--
+-- Run as a superuser with psql variables (passwords never live in the repo):
+--   psql -v ON_ERROR_STOP=1 -v db_name=... -v owner_pw=... -v rw_pw=... -f roles.sql
+--
+-- Roles:
+--   app_owner - owns the schema; used ONLY by Alembic migrations.
+--   app_rw    - used by the running application (api, worker). Not an owner, no
+--               BYPASSRLS, so Row-Level Security policies apply to it. Gets DML on
+--               future tables via ALTER DEFAULT PRIVILEGES; migrations narrow this per
+--               table (audit_log, change_comments, attachments -> INSERT/SELECT only;
+--               alembic_version -> SELECT only). Do it in migrations, not here: this
+--               script runs only on an empty volume.
+
+\set ON_ERROR_STOP on
+
+-- Roles -----------------------------------------------------------------
+CREATE ROLE app_owner WITH LOGIN NOSUPERUSER NOCREATEDB NOCREATEROLE NOREPLICATION NOBYPASSRLS
+    PASSWORD :'owner_pw';
+CREATE ROLE app_rw WITH LOGIN NOSUPERUSER NOCREATEDB NOCREATEROLE NOREPLICATION NOBYPASSRLS
+    PASSWORD :'rw_pw';
+
+-- Database-level access ------------------------------------------------------
+REVOKE ALL ON DATABASE :"db_name" FROM PUBLIC;
+-- CREATE lets app_owner install trusted extensions (e.g. pgcrypto, citext).
+GRANT CONNECT, TEMPORARY, CREATE ON DATABASE :"db_name" TO app_owner;
+GRANT CONNECT, TEMPORARY ON DATABASE :"db_name" TO app_rw;
+
+-- Schema ---------------------------------------------------------------------
+REVOKE ALL ON SCHEMA public FROM PUBLIC;
+ALTER SCHEMA public OWNER TO app_owner;
+GRANT USAGE ON SCHEMA public TO app_rw;
+
+-- Default privileges for objects that app_owner (migrations) will create -----
+ALTER DEFAULT PRIVILEGES FOR ROLE app_owner IN SCHEMA public
+    GRANT SELECT, INSERT, UPDATE, DELETE ON TABLES TO app_rw;
+ALTER DEFAULT PRIVILEGES FOR ROLE app_owner IN SCHEMA public
+    GRANT USAGE, SELECT ON SEQUENCES TO app_rw;
+ALTER DEFAULT PRIVILEGES FOR ROLE app_owner IN SCHEMA public
+    GRANT EXECUTE ON FUNCTIONS TO app_rw;
+
+-- Sane session defaults ------------------------------------------------------
+ALTER ROLE app_owner SET timezone TO 'UTC';
+ALTER ROLE app_rw SET timezone TO 'UTC';
+-- Guard against idle transactions holding audit chain head locks.
+ALTER ROLE app_rw SET idle_in_transaction_session_timeout TO '60s';

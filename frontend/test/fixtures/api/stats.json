@@ -1,0 +1,18 @@
+{
+ "pending_approval": 2,
+ "approved_not_implemented": 2,
+ "emergency_last_30_days": 1,
+ "implemented_not_verified": 3,
+ "emergency_not_approved_in_24h": 1,
+ "implemented_outside_window": 1,
+ "by_status": {
+  "approved": 2,
+  "cancelled": 2,
+  "draft": 2,
+  "implemented": 3,
+  "pending_approval": 2,
+  "rejected": 1,
+  "rolled_back": 1,
+  "verified": 5
+ }
+}

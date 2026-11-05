@@ -1,0 +1,67 @@
+{
+ "items": [
+  {
+   "id": "86282fd9-8f4f-4ca0-870a-8c0e20c33712",
+   "name": "Alfa S.A.",
+   "tax_id": null,
+   "prefix": "ALFA",
+   "status": "active",
+   "is_ksc_entity": true,
+   "default_approver_id": "ece4b2f9-0e39-472a-825e-3cc76b6885bd",
+   "created_at": "2026-10-30T05:55:57.818317Z",
+   "updated_at": "2026-10-30T05:55:57.918112Z",
+   "my_roles": [],
+   "counts": {
+    "active_ci": 12,
+    "all_ci": 13,
+    "editors": 1,
+    "approvers": 1,
+    "auditors": 1,
+    "viewers": 0
+   }
+  },
+  {
+   "id": "c328df5a-c841-4834-8449-36196696e958",
+   "name": "Beta sp. z o.o.",
+   "tax_id": null,
+   "prefix": "BETA",
+   "status": "active",
+   "is_ksc_entity": false,
+   "default_approver_id": "ece4b2f9-0e39-472a-825e-3cc76b6885bd",
+   "created_at": "2026-10-30T05:55:57.818317Z",
+   "updated_at": "2026-10-30T05:55:57.918112Z",
+   "my_roles": [],
+   "counts": {
+    "active_ci": 9,
+    "all_ci": 10,
+    "editors": 1,
+    "approvers": 1,
+    "auditors": 1,
+    "viewers": 0
+   }
+  },
+  {
+   "id": "41901f0c-b5bd-431a-ae20-2a31bc0059a9",
+   "name": "Gamma sp. z o.o.",
+   "tax_id": null,
+   "prefix": "GAMMA",
+   "status": "active",
+   "is_ksc_entity": false,
+   "default_approver_id": "ece4b2f9-0e39-472a-825e-3cc76b6885bd",
+   "created_at": "2026-10-30T05:55:57.818317Z",
+   "updated_at": "2026-10-30T05:55:57.918112Z",
+   "my_roles": [],
+   "counts": {
+    "active_ci": 6,
+    "all_ci": 8,
+    "editors": 1,
+    "approvers": 1,
+    "auditors": 1,
+    "viewers": 1
+   }
+  }
+ ],
+ "total": 3,
+ "limit": 500,
+ "offset": 0
+}

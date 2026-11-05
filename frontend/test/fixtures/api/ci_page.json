@@ -1,0 +1,77 @@
+{
+ "items": [
+  {
+   "id": "b3063a93-a6bb-4d56-9d14-be44d33858f7",
+   "company_id": "86282fd9-8f4f-4ca0-870a-8c0e20c33712",
+   "ci_type_id": "ffeffce8-7bd9-42da-aea8-b7cd3955e671",
+   "ci_type_code": "account",
+   "ci_type_name": "Konto",
+   "identifier": "ADM-JKOWALSKI",
+   "name": "Konto administracyjne adm.jkowalski",
+   "description": null,
+   "owner_user_id": null,
+   "is_active": true,
+   "created_at": "2026-10-30T05:55:58.150000Z",
+   "updated_at": "2026-10-30T05:55:58.150000Z"
+  },
+  {
+   "id": "a6ef2b32-2206-47e1-bca0-9ea371080922",
+   "company_id": "86282fd9-8f4f-4ca0-870a-8c0e20c33712",
+   "ci_type_id": "54ee2c8e-81d1-4649-9a0a-3f6dc4ac68b6",
+   "ci_type_code": "application",
+   "ci_type_name": "Aplikacja",
+   "identifier": "APP-ERP",
+   "name": "System ERP",
+   "description": null,
+   "owner_user_id": "49561563-057e-41f8-867f-711b9384f189",
+   "is_active": true,
+   "created_at": "2026-10-30T05:55:58.150000Z",
+   "updated_at": "2026-10-30T05:55:58.150000Z"
+  },
+  {
+   "id": "ef99b3e6-10ae-420c-86d3-e4352a39936f",
+   "company_id": "86282fd9-8f4f-4ca0-870a-8c0e20c33712",
+   "ci_type_id": "196e2d03-cf56-4cce-ad9c-8957d2a3d181",
+   "ci_type_code": "firewall",
+   "ci_type_name": "Zapora sieciowa (firewall)",
+   "identifier": "FW-01",
+   "name": "Zapora brzegowa (klaster HA)",
+   "description": null,
+   "owner_user_id": "ece4b2f9-0e39-472a-825e-3cc76b6885bd",
+   "is_active": true,
+   "created_at": "2026-10-30T05:55:58.150000Z",
+   "updated_at": "2026-10-30T05:55:58.150000Z"
+  },
+  {
+   "id": "14dce7ce-0c16-4a09-840c-af1735c98027",
+   "company_id": "86282fd9-8f4f-4ca0-870a-8c0e20c33712",
+   "ci_type_id": "196e2d03-cf56-4cce-ad9c-8957d2a3d181",
+   "ci_type_code": "firewall",
+   "ci_type_name": "Zapora sieciowa (firewall)",
+   "identifier": "FW-02",
+   "name": "Zapora strefy DMZ",
+   "description": null,
+   "owner_user_id": "ece4b2f9-0e39-472a-825e-3cc76b6885bd",
+   "is_active": true,
+   "created_at": "2026-10-30T05:55:58.150000Z",
+   "updated_at": "2026-10-30T05:55:58.150000Z"
+  },
+  {
+   "id": "12902e5a-79a4-4c7f-a1b4-0554d7fd98e6",
+   "company_id": "86282fd9-8f4f-4ca0-870a-8c0e20c33712",
+   "ci_type_id": "5dc9f26e-1d33-448a-ba7a-8352e00c86a2",
+   "ci_type_code": "group",
+   "ci_type_name": "Grupa",
+   "identifier": "GRP-DOMAIN-ADMINS",
+   "name": "Grupa Domain Admins",
+   "description": null,
+   "owner_user_id": null,
+   "is_active": true,
+   "created_at": "2026-10-30T05:55:58.150000Z",
+   "updated_at": "2026-10-30T05:55:58.150000Z"
+  }
+ ],
+ "total": 12,
+ "limit": 5,
+ "offset": 0
+}

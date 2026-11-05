@@ -1,0 +1,9 @@
+{
+ "type": "urn:rejestr:problem:auth.too_many_attempts",
+ "title": "Zbyt wiele żądań",
+ "status": 429,
+ "detail": "Zbyt wiele nieudanych prób logowania z tej sieci. Spróbuj ponownie później.",
+ "code": "auth.too_many_attempts",
+ "instance": "/api/v1/auth/login",
+ "request_id": "7d0c1d52-31f4-4c1b-8d55-0b3e5b6a9c21"
+}

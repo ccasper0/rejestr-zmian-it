@@ -1,0 +1,301 @@
+# Rejestr zmian IT - local / single-host stack.
+#
+#   cp .env.example .env    # then set passwords
+#   docker compose up --build
+#
+# Services: db (PostgreSQL 16), redis, migrate (one-shot Alembic as app_owner),
+# api (FastAPI as app_rw), worker (arq, same image as api), web (nginx + Flutter).
+#
+# Safe defaults: APP_ENV falls back to "prod" and AUTH_MODE to "local" (accounts with
+# passwords, ADR 0018) when not set - the dev login provider is never enabled implicitly.
+
+name: rejestr
+
+x-backend-env: &backend-env
+  APP_ENV: ${APP_ENV:-prod}
+  AUTH_MODE: ${AUTH_MODE:-local}
+  DATABASE_URL: ${DATABASE_URL:?DATABASE_URL must be set in .env}
+  REDIS_URL: ${REDIS_URL:-redis://redis:6379/0}
+  CORS_ORIGINS: ${CORS_ORIGINS:-}
+  LOG_LEVEL: ${LOG_LEVEL:-INFO}
+  # Application logs: json (one JSON object per line) | console (ADR 0019 §4).
+  LOG_FORMAT: ${LOG_FORMAT:-json}
+  STORAGE_PATH: ${STORAGE_PATH:-/data/storage}
+  # Max size of one change attachment in bytes (ADR 0013 §4).
+  ATTACHMENT_MAX_BYTES: ${ATTACHMENT_MAX_BYTES:-26214400}
+  # Whitelist of attachment types detected from the content (ADR 0019 §3); empty = default.
+  ATTACHMENT_ALLOWED_TYPES: ${ATTACHMENT_ALLOWED_TYPES:-}
+  # Reports (ADR 0017): background generation above this many changes; upper limit.
+  REPORT_ASYNC_THRESHOLD: ${REPORT_ASYNC_THRESHOLD:-200}
+  REPORT_MAX_CHANGES: ${REPORT_MAX_CHANGES:-5000}
+  # Max age of the last chain verification behind the "chain intact" badge (ADR 0013 §11).
+  AUDIT_STATUS_MAX_AGE_HOURS: ${AUDIT_STATUS_MAX_AGE_HOURS:-26}
+  # Local accounts (AUTH_MODE=local, ADR 0018): the access-token key is required there
+  # (min. 64 chars with APP_ENV=prod); sessions, lockout and the login limit.
+  AUTH_JWT_SECRET: ${AUTH_JWT_SECRET:-}
+  AUTH_ACCESS_TOKEN_MINUTES: ${AUTH_ACCESS_TOKEN_MINUTES:-15}
+  AUTH_REFRESH_IDLE_MINUTES: ${AUTH_REFRESH_IDLE_MINUTES:-120}
+  AUTH_SESSION_MAX_HOURS: ${AUTH_SESSION_MAX_HOURS:-12}
+  AUTH_LOCKOUT_THRESHOLD: ${AUTH_LOCKOUT_THRESHOLD:-5}
+  AUTH_LOCKOUT_MINUTES: ${AUTH_LOCKOUT_MINUTES:-15}
+  AUTH_LOGIN_MAX_FAILURES_PER_NETWORK: ${AUTH_LOGIN_MAX_FAILURES_PER_NETWORK:-30}
+  # Validity of a temporary password (hours; ADR 0018 §12): 7 days.
+  TEMP_PASSWORD_TTL_HOURS: ${TEMP_PASSWORD_TTL_HOURS:-168}
+  # Only used with AUTH_MODE=dev (then required, min. 32 chars).
+  DEV_AUTH_SECRET: ${DEV_AUTH_SECRET:-}
+  # Connection pools per process (ADR 0010 §5).
+  DB_POOL_SIZE: ${DB_POOL_SIZE:-5}
+  DB_MAX_OVERFLOW: ${DB_MAX_OVERFLOW:-10}
+  DB_POOL_TIMEOUT_SECONDS: ${DB_POOL_TIMEOUT_SECONDS:-30}
+  DB_AUX_POOL_SIZE: ${DB_AUX_POOL_SIZE:-2}
+  DB_AUX_MAX_OVERFLOW: ${DB_AUX_MAX_OVERFLOW:-3}
+  # login_failed aggregation in the audit log (ADR 0010).
+  AUTH_FAILURE_WINDOW_SECONDS: ${AUTH_FAILURE_WINDOW_SECONDS:-300}
+  AUTH_FAILURE_MAX_BUCKETS: ${AUTH_FAILURE_MAX_BUCKETS:-200}
+  AUTH_FAILURE_MAX_IMMEDIATE_ENTRIES: ${AUTH_FAILURE_MAX_IMMEDIATE_ENTRIES:-200}
+  TZ: UTC
+
+# api, worker and migrate share one image (rejestr-backend:local); each declares
+# the same build so `docker compose up --build` never tries to pull it.
+x-backend-build: &backend-build
+  context: ./backend
+  dockerfile: Dockerfile
+
+services:
+  db:
+    image: postgres:16-alpine
+    restart: unless-stopped
+    environment:
+      POSTGRES_DB: rejestr
+      POSTGRES_USER: postgres
+      POSTGRES_PASSWORD: ${POSTGRES_PASSWORD:?POSTGRES_PASSWORD must be set in .env}
+      # Consumed by deploy/postgres/init/10-roles.sh (first start only).
+      APP_OWNER_PASSWORD: ${APP_OWNER_PASSWORD:?APP_OWNER_PASSWORD must be set in .env}
+      APP_RW_PASSWORD: ${APP_RW_PASSWORD:?APP_RW_PASSWORD must be set in .env}
+      POSTGRES_INITDB_ARGS: --encoding=UTF8 --locale=C.UTF-8
+      TZ: UTC
+    volumes:
+      - db-data:/var/lib/postgresql/data
+      - ./deploy/postgres/init:/docker-entrypoint-initdb.d:ro
+    ports:
+      # Localhost only - for running the backend / Alembic outside Docker.
+      - "127.0.0.1:${DB_PORT:-5432}:5432"
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U postgres -d rejestr"]
+      interval: 5s
+      timeout: 5s
+      retries: 20
+      start_period: 10s
+
+  # Valkey (BSD-3-Clause, Redis-protocol compatible) - the arq job queue. The service
+  # keeps the name "redis" (REDIS_URL). Only queued jobs live here; if an old
+  # Redis 7.4 volume does not load, remove the redis-data volume.
+  redis:
+    image: valkey/valkey:8-alpine
+    restart: unless-stopped
+    command: ["valkey-server", "--appendonly", "yes", "--save", ""]
+    volumes:
+      - redis-data:/data
+    ports:
+      # Localhost only - for running api/worker outside Docker.
+      - "127.0.0.1:${REDIS_PORT:-6379}:6379"
+    healthcheck:
+      test: ["CMD", "valkey-cli", "ping"]
+      interval: 5s
+      timeout: 3s
+      retries: 20
+
+  migrate:
+    build: *backend-build
+    image: rejestr-backend:local
+    # One-shot: applies Alembic migrations as app_owner, then exits.
+    command: ["alembic", "upgrade", "head"]
+    environment:
+      <<: *backend-env
+      MIGRATIONS_DATABASE_URL: ${MIGRATIONS_DATABASE_URL:?MIGRATIONS_DATABASE_URL must be set in .env}
+    depends_on:
+      db:
+        condition: service_healthy
+    restart: "no"
+
+  api:
+    image: rejestr-backend:local
+    pull_policy: never  # obraz budowany przez usługę "migrate" (unika wyścigu przy wspólnym tagu)
+    restart: unless-stopped
+    # No --forwarded-allow-ips flag on purpose: uvicorn reads the trusted proxy
+    # list from $FORWARDED_ALLOW_IPS (below). Never use "*" - any client could
+    # then forge X-Forwarded-For and the IP stored in audit_log.
+    command:
+      - uvicorn
+      - app.main:app
+      - --host=0.0.0.0
+      - --port=8000
+      - --proxy-headers
+      # Access log written by the app itself (JSON, request_id/user_id, no query
+      # strings - app.logs.AccessLogMiddleware, ADR 0019 §4).
+      - --no-access-log
+    environment:
+      <<: *backend-env
+      # Only nginx (web, fixed address below) may set X-Forwarded-For /
+      # X-Forwarded-Proto. Deliberately NOT the whole 172.28.0.0/16: requests
+      # to the published port 127.0.0.1:8000 reach the container from the
+      # network gateway 172.28.0.1, so trusting the subnet would let anyone
+      # on the host spoof the client IP by talking to the API directly.
+      FORWARDED_ALLOW_IPS: ${FORWARDED_ALLOW_IPS:-172.28.0.10}
+    volumes:
+      - storage:/data/storage
+    ports:
+      # Localhost only - direct API access for development (/api/v1/docs exists
+      # only with APP_ENV=dev, ADR 0019 §9). Browsers
+      # and other hosts go through nginx (web).
+      - "127.0.0.1:${API_PORT:-8000}:8000"
+    depends_on:
+      db:
+        condition: service_healthy
+      redis:
+        condition: service_healthy
+      migrate:
+        condition: service_completed_successfully
+    healthcheck:
+      test:
+        - CMD
+        - python
+        - -c
+        - "import urllib.request; urllib.request.urlopen('http://127.0.0.1:8000/api/v1/health', timeout=3)"
+      interval: 10s
+      timeout: 5s
+      retries: 10
+      start_period: 15s
+
+  worker:
+    image: rejestr-backend:local
+    pull_policy: never  # obraz budowany przez usługę "migrate"
+    restart: unless-stopped
+    command: ["arq", "app.worker.WorkerSettings"]
+    environment: *backend-env
+    volumes:
+      - storage:/data/storage
+    depends_on:
+      db:
+        condition: service_healthy
+      redis:
+        condition: service_healthy
+      migrate:
+        condition: service_completed_successfully
+    healthcheck:
+      # arq writes a health key to Redis periodically; --check reads it.
+      test: ["CMD", "arq", "--check", "app.worker.WorkerSettings"]
+      interval: 30s
+      timeout: 10s
+      retries: 5
+      start_period: 30s
+
+  web:
+    build:
+      context: ./frontend
+      dockerfile: Dockerfile
+      additional_contexts:
+        deploy: ./deploy
+      args:
+        API_URL: ${WEB_API_URL-}
+    image: rejestr-web:local
+    restart: unless-stopped
+    # nginx template variables (deploy/nginx/templates, ADR 0019); see .env.example.
+    environment:
+      NGINX_API_RATE: ${NGINX_API_RATE:-20r/s}
+      NGINX_API_BURST: ${NGINX_API_BURST:-100}
+      NGINX_AUTH_RATE: ${NGINX_AUTH_RATE:-10r/m}
+      NGINX_AUTH_BURST: ${NGINX_AUTH_BURST:-10}
+      NGINX_REFRESH_RATE: ${NGINX_REFRESH_RATE:-30r/m}
+      NGINX_REFRESH_BURST: ${NGINX_REFRESH_BURST:-20}
+      NGINX_CONN_PER_IP: ${NGINX_CONN_PER_IP:-50}
+      NGINX_RETRY_AFTER: ${NGINX_RETRY_AFTER:-10}
+      NGINX_CLIENT_MAX_BODY_SIZE: ${NGINX_CLIENT_MAX_BODY_SIZE:-26m}
+      NGINX_HSTS: ${NGINX_HSTS-}
+      # The API origin compiled into the frontend (cross-origin API) must be allowed
+      # by the CSP connect-src; empty = same origin.
+      NGINX_CSP_CONNECT_EXTRA: ${WEB_API_URL-}
+      NGINX_TRUSTED_PROXIES: ${NGINX_TRUSTED_PROXIES:-127.0.0.1/32}
+    networks:
+      default:
+        # Fixed address = the only proxy the API trusts (FORWARDED_ALLOW_IPS).
+        # Outside ip_range, so it never collides with dynamic addresses.
+        ipv4_address: 172.28.0.10
+    ports:
+      - "${WEB_PORT:-8080}:80"
+    depends_on:
+      api:
+        condition: service_started
+    healthcheck:
+      test: ["CMD-SHELL", "wget -q -O /dev/null http://127.0.0.1/healthz || exit 1"]
+      interval: 15s
+      timeout: 3s
+      retries: 5
+      start_period: 5s
+
+  # Optional daily backup (ADR 0019 §6): docker compose --profile backup up -d backup
+  # pg_dump (custom format) + storage archive + SHA-256 into ${BACKUP_HOST_DIR:-./backups}.
+  # One-off backups / restore: scripts/backup.sh|ps1, scripts/restore.sh|ps1.
+  # Optional age encryption (ADR 0019 §10): BACKUP_AGE_RECIPIENT = public key(s).
+  # Healthcheck = age of the last successful backup (ADR 0019 §11).
+  backup:
+    build: ./deploy/backup
+    image: rejestr-backup:local
+    profiles: ["backup"]
+    restart: unless-stopped
+    command: ["sh", "/opt/backup/backup-loop.sh"]
+    environment:
+      PGPASSWORD: ${POSTGRES_PASSWORD:?POSTGRES_PASSWORD must be set in .env}
+      POSTGRES_DB: rejestr
+      BACKUP_AT: ${BACKUP_AT:-01:30}
+      BACKUP_RETENTION_DAYS: ${BACKUP_RETENTION_DAYS:-14}
+      BACKUP_AGE_RECIPIENT: ${BACKUP_AGE_RECIPIENT:-}
+      # Host path - not usable in the container; passed only so that the service
+      # refuses to start instead of silently writing unencrypted backups.
+      BACKUP_AGE_RECIPIENTS: ${BACKUP_AGE_RECIPIENTS:-}
+      # Healthcheck threshold (ADR 0019 §11): unhealthy when the last successful
+      # backup is older than this many hours or the last run failed.
+      BACKUP_MAX_AGE_HOURS: ${BACKUP_MAX_AGE_HOURS:-26}
+      TZ: UTC
+    volumes:
+      - ./deploy/backup:/opt/backup:ro
+      - storage:/data/storage:ro
+      - ${BACKUP_HOST_DIR:-./backups}:/backups
+    # Monitoring of backups (ISO 27001 A.8.13): backup-loop.sh writes
+    # /backups/.backup-last-success / .backup-last-failure; a failed run or a
+    # stale backup turns the container "unhealthy" (docker compose ps, docker
+    # inspect, health_status events) instead of only a line in the log.
+    healthcheck:
+      test: ["CMD", "sh", "/opt/backup/healthcheck.sh"]
+      interval: 5m
+      timeout: 10s
+      retries: 1
+      start_period: 1m
+    depends_on:
+      db:
+        condition: service_healthy
+
+networks:
+  # The project's default network with a fixed subnet so that nginx (web) can
+  # have a static address (172.28.0.10) which the API trusts for proxy headers
+  # (FORWARDED_ALLOW_IPS). Dynamic addresses of other containers come from
+  # ip_range 172.28.1.0/24; 172.28.0.1 is the gateway (host-originated traffic
+  # to published ports). If 172.28.0.0/16 collides with a local network,
+  # change subnet, ip_range, gateway, web ipv4_address and FORWARDED_ALLOW_IPS
+  # together.
+  #
+  # NOTE: when an existing stack is upgraded to this network definition,
+  # compose recreates the network; containers that are not recreated lose
+  # their service-name DNS aliases. Run once:
+  #   docker compose up -d --force-recreate
+  default:
+    ipam:
+      config:
+        - subnet: 172.28.0.0/16
+          ip_range: 172.28.1.0/24
+          gateway: 172.28.0.1
+
+volumes:
+  db-data:
+  redis-data:
+  storage:

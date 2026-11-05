@@ -1,0 +1,9 @@
+{
+ "type": "urn:rejestr:problem:company.name_taken",
+ "title": "Konflikt",
+ "status": 409,
+ "detail": "Spółka o tej nazwie już istnieje.",
+ "code": "company.name_taken",
+ "instance": "/api/v1/companies",
+ "request_id": "ece10cb3-5dac-462e-9408-78af8eaa4789"
+}

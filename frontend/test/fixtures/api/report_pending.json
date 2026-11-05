@@ -1,0 +1,49 @@
+{
+ "id": "c7d8e9f0-1a2b-4c3d-8e4f-5a6b7c8d9e0f",
+ "number": "RAP-2026-0001",
+ "kind": "register",
+ "format": "pdf",
+ "status": "pending",
+ "company_id": null,
+ "company": null,
+ "companies": [
+  {
+   "id": "86282fd9-8f4f-4ca0-870a-8c0e20c33712",
+   "name": "Alfa S.A.",
+   "prefix": "ALFA"
+  },
+  {
+   "id": "5d1c5f0e-3a4b-4c55-9d1e-2f1a7b0c9e21",
+   "name": "Beta sp. z o.o.",
+   "prefix": "BETA"
+  }
+ ],
+ "change_id": null,
+ "change_number": null,
+ "period_from": "2026-09-30T22:00:00.000000Z",
+ "period_to": "2026-11-01T23:00:00.000000Z",
+ "filters": {
+  "period_by": "created",
+  "status": [],
+  "type": [],
+  "category": [],
+  "ci": [],
+  "assignee": null,
+  "approver": null,
+  "approved_by": null,
+  "q": null
+ },
+ "include_audit_trail": false,
+ "generated_by": {
+  "id": "0b7e2a43-6f8c-4d2e-a1f0-3c9d5e7b8a10",
+  "display_name": "Alicja Audytorka"
+ },
+ "created_at": "2026-11-03T09:15:02.123456Z",
+ "completed_at": null,
+ "change_count": 412,
+ "data_sha256": null,
+ "file_sha256": null,
+ "size": null,
+ "error": null,
+ "download_url": null
+}

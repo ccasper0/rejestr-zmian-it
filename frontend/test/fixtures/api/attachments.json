@@ -1,0 +1,28 @@
+[
+ {
+  "id": "d374c43f-3e25-422f-a513-dc88f5df6827",
+  "change_id": "e41ce831-5253-4e52-bd0f-31059e6c686f",
+  "filename": "protokol.txt",
+  "content_type": "text/plain",
+  "size": 44,
+  "sha256": "e668f00ed4f72da28ea3cb09611c5be68405b030366517806f01a39752dbd93d",
+  "uploaded_by": {
+   "id": "49561563-057e-41f8-867f-711b9384f189",
+   "display_name": "Ewa Edytorska"
+  },
+  "created_at": "2026-10-30T07:03:23.880780Z"
+ },
+ {
+  "id": "51b6da77-2fa8-45ee-9216-31e11c980c09",
+  "change_id": "e41ce831-5253-4e52-bd0f-31059e6c686f",
+  "filename": "protokol.txt",
+  "content_type": "text/plain",
+  "size": 44,
+  "sha256": "e668f00ed4f72da28ea3cb09611c5be68405b030366517806f01a39752dbd93d",
+  "uploaded_by": {
+   "id": "49561563-057e-41f8-867f-711b9384f189",
+   "display_name": "Ewa Edytorska"
+  },
+  "created_at": "2026-10-30T07:06:43.715097Z"
+ }
+]

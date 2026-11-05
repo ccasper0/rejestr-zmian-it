@@ -1,0 +1,94 @@
+{
+ "items": [
+  {
+   "category_id": "c9c27fd0-9098-4fe9-8296-786cc9241053",
+   "code": "ACC",
+   "name": "Konta i uprawnienia",
+   "requires_approval": false,
+   "default_risk": "low",
+   "is_active": true,
+   "approver_override_id": null
+  },
+  {
+   "category_id": "854fdab4-1051-4400-b9b8-56a613d77db4",
+   "code": "APP",
+   "name": "Aplikacje biznesowe",
+   "requires_approval": true,
+   "default_risk": "medium",
+   "is_active": true,
+   "approver_override_id": null
+  },
+  {
+   "category_id": "c37bdfac-1fe6-4dc7-ab83-2443882952f7",
+   "code": "BKP",
+   "name": "Kopie zapasowe",
+   "requires_approval": true,
+   "default_risk": "low",
+   "is_active": true,
+   "approver_override_id": null
+  },
+  {
+   "category_id": "f27360a6-7333-476a-b47b-a541c5dcbe8c",
+   "code": "FW",
+   "name": "Firewall / sieć",
+   "requires_approval": true,
+   "default_risk": "medium",
+   "is_active": true,
+   "approver_override_id": "ece4b2f9-0e39-472a-825e-3cc76b6885bd"
+  },
+  {
+   "category_id": "5b65f1dc-1ff9-4381-b4b9-e638fc884712",
+   "code": "GPO",
+   "name": "Polityki domenowe",
+   "requires_approval": true,
+   "default_risk": "medium",
+   "is_active": true,
+   "approver_override_id": null
+  },
+  {
+   "category_id": "a63cc13c-c0db-441a-9287-0232a8d368c9",
+   "code": "NET",
+   "name": "Sieć",
+   "requires_approval": true,
+   "default_risk": "medium",
+   "is_active": true,
+   "approver_override_id": null
+  },
+  {
+   "category_id": "87aef36a-58e3-41d4-99b3-bb6664e06714",
+   "code": "OT",
+   "name": "Systemy OT / przemysłowe",
+   "requires_approval": true,
+   "default_risk": "high",
+   "is_active": true,
+   "approver_override_id": null
+  },
+  {
+   "category_id": "2ce9cc7b-4905-40e1-9cd0-7a37b8498858",
+   "code": "PATCH",
+   "name": "Aktualizacje i łatki",
+   "requires_approval": true,
+   "default_risk": "medium",
+   "is_active": true,
+   "approver_override_id": null
+  },
+  {
+   "category_id": "78daffa2-2e13-47c3-aa2f-c6df8b771261",
+   "code": "SEC",
+   "name": "Bezpieczeństwo",
+   "requires_approval": true,
+   "default_risk": "medium",
+   "is_active": true,
+   "approver_override_id": null
+  },
+  {
+   "category_id": "bb1d09e5-eff7-4047-b8e9-d7be644b027e",
+   "code": "SRV",
+   "name": "Serwery / wirtualizacja",
+   "requires_approval": true,
+   "default_risk": "medium",
+   "is_active": true,
+   "approver_override_id": null
+  }
+ ]
+}

@@ -1,0 +1,97 @@
+{
+ "id": "4a5096c0-b9e3-403e-9c83-6bb701778848",
+ "company_id": "86282fd9-8f4f-4ca0-870a-8c0e20c33712",
+ "number": "CHG-ALFA-2026-0014",
+ "title": "Migracja serwera plików na nową macierz",
+ "status": "draft",
+ "change_type": "normal",
+ "risk": "high",
+ "category": {
+  "id": "bb1d09e5-eff7-4047-b8e9-d7be644b027e",
+  "code": "SRV",
+  "name": "Serwery / wirtualizacja"
+ },
+ "subcategory": {
+  "id": "b69929b1-0c01-4c44-b909-51fbfe279c77",
+  "code": "SRV-MIGR",
+  "name": "Migracja"
+ },
+ "ci": [
+  {
+   "id": "cdf9cb84-6287-44cf-89aa-dc135eb4fe97",
+   "identifier": "SRV-FS-01",
+   "name": "Serwer plików",
+   "ci_type_code": "server",
+   "is_active": true,
+   "snapshot": false,
+   "current_identifier": "SRV-FS-01",
+   "current_name": "Serwer plików",
+   "owner": null,
+   "consented": false
+  }
+ ],
+ "requested_by": {
+  "id": "49561563-057e-41f8-867f-711b9384f189",
+  "display_name": "Ewa Edytorska"
+ },
+ "assignee": {
+  "id": "49561563-057e-41f8-867f-711b9384f189",
+  "display_name": "Ewa Edytorska"
+ },
+ "approver": {
+  "id": "ece4b2f9-0e39-472a-825e-3cc76b6885bd",
+  "display_name": "Jan Zatwierdzający"
+ },
+ "verifier": {
+  "id": "ece4b2f9-0e39-472a-825e-3cc76b6885bd",
+  "display_name": "Jan Zatwierdzający"
+ },
+ "window_start": "2026-10-30T05:55:58.336954Z",
+ "window_end": "2026-10-30T07:55:58.336954Z",
+ "approved_at": null,
+ "approved_by": null,
+ "auto_approved": false,
+ "implemented_at": null,
+ "verified_at": null,
+ "rejected_at": null,
+ "deviations": [],
+ "created_at": "2026-10-29T05:55:58.336954Z",
+ "updated_at": "2026-10-29T05:55:58.336954Z",
+ "description": "Migracja serwera plików na nową macierz. Zmiana zgłoszona w ramach bieżącego utrzymania.",
+ "implementation_plan": "1. Przygotowanie i kopia konfiguracji.\n2. Wdrożenie.\n3. Testy po wdrożeniu.",
+ "rollback_plan": "Przywrócenie konfiguracji z kopii wykonanej przed wdrożeniem.",
+ "impact": "Brak przerwy w działaniu usług.",
+ "requirement_ref": "ISO/IEC 27001:2022 A.8.32; uoKSC",
+ "ticket_ref": "SD-2199",
+ "supersedes_change_id": null,
+ "supersedes_number": null,
+ "superseded_by": [],
+ "version": 1,
+ "allowed_actions": [
+  "submit",
+  "cancel"
+ ],
+ "editable_fields": [
+  "approver_id",
+  "assignee_id",
+  "category_id",
+  "change_type",
+  "ci_ids",
+  "description",
+  "impact",
+  "implementation_plan",
+  "requirement_ref",
+  "risk",
+  "rollback_plan",
+  "subcategory_id",
+  "ticket_ref",
+  "title",
+  "verifier_id",
+  "window_end",
+  "window_start"
+ ],
+ "access": "member",
+ "suggested_approver_id": "ece4b2f9-0e39-472a-825e-3cc76b6885bd",
+ "consents": [],
+ "comments": []
+}

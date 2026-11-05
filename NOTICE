@@ -1,0 +1,12 @@
+Rejestr zmian IT (rejestr-zmian)
+Copyright 2026 ccasper0
+
+This product is licensed under the Apache License, Version 2.0 (see LICENSE).
+
+This product bundles the IBM Plex Sans and IBM Plex Mono fonts,
+Copyright © 2017 IBM Corp., licensed under the SIL Open Font License,
+Version 1.1 (see backend/app/reports/fonts/OFL.txt and
+frontend/assets/fonts/OFL.txt).
+
+Third-party dependencies and their licenses are listed in
+THIRD_PARTY_NOTICES.md.

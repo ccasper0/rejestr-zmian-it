@@ -1,0 +1,243 @@
+{
+ "items": [
+  {
+   "id": "b1c2d3e4-f5a6-4b7c-8d9e-0f1a2b3c4d5e",
+   "number": "RAP-ALFA-2026-0004",
+   "kind": "register",
+   "format": "csv",
+   "status": "done",
+   "company_id": "86282fd9-8f4f-4ca0-870a-8c0e20c33712",
+   "company": {
+    "id": "86282fd9-8f4f-4ca0-870a-8c0e20c33712",
+    "name": "Alfa S.A.",
+    "prefix": "ALFA"
+   },
+   "companies": [
+    {
+     "id": "86282fd9-8f4f-4ca0-870a-8c0e20c33712",
+     "name": "Alfa S.A.",
+     "prefix": "ALFA"
+    }
+   ],
+   "change_id": null,
+   "change_number": null,
+   "period_from": null,
+   "period_to": null,
+   "filters": {
+    "period_by": "created",
+    "status": [],
+    "type": [],
+    "category": [],
+    "ci": [],
+    "assignee": null,
+    "approver": null,
+    "approved_by": null,
+    "q": "zapora"
+   },
+   "include_audit_trail": false,
+   "generated_by": {
+    "id": "0b7e2a43-6f8c-4d2e-a1f0-3c9d5e7b8a10",
+    "display_name": "Alicja Audytorka"
+   },
+   "created_at": "2026-11-03T09:20:00.000000Z",
+   "completed_at": "2026-11-03T09:20:00.500000Z",
+   "change_count": 3,
+   "data_sha256": "9f2c1a1a1a1a1a1a1a1a1a1a1a1a1a1a1a1a1a1a1a1a1a1a1a1a1a1a1a1a1a1a",
+   "file_sha256": "4be1c3c3c3c3c3c3c3c3c3c3c3c3c3c3c3c3c3c3c3c3c3c3c3c3c3c3c3c3c3c3",
+   "size": 1022,
+   "error": null,
+   "download_url": "/api/v1/reports/b1c2d3e4-f5a6-4b7c-8d9e-0f1a2b3c4d5e/download"
+  },
+  {
+   "id": "a3e1c2d4-5b6f-4a70-8b9c-0d1e2f3a4b5c",
+   "number": "RAP-ALFA-2026-0003",
+   "kind": "register",
+   "format": "pdf",
+   "status": "done",
+   "company_id": "86282fd9-8f4f-4ca0-870a-8c0e20c33712",
+   "company": {
+    "id": "86282fd9-8f4f-4ca0-870a-8c0e20c33712",
+    "name": "Alfa S.A.",
+    "prefix": "ALFA"
+   },
+   "companies": [
+    {
+     "id": "86282fd9-8f4f-4ca0-870a-8c0e20c33712",
+     "name": "Alfa S.A.",
+     "prefix": "ALFA"
+    }
+   ],
+   "change_id": null,
+   "change_number": null,
+   "period_from": "2026-09-30T22:00:00.000000Z",
+   "period_to": "2026-11-01T23:00:00.000000Z",
+   "filters": {
+    "period_by": "implemented",
+    "status": [
+     "implemented",
+     "verified"
+    ],
+    "type": [
+     "emergency"
+    ],
+    "category": [],
+    "ci": [],
+    "assignee": null,
+    "approver": null,
+    "approved_by": null,
+    "q": null
+   },
+   "include_audit_trail": true,
+   "generated_by": {
+    "id": "0b7e2a43-6f8c-4d2e-a1f0-3c9d5e7b8a10",
+    "display_name": "Alicja Audytorka"
+   },
+   "created_at": "2026-11-03T09:15:02.123456Z",
+   "completed_at": "2026-11-03T09:15:04.654321Z",
+   "change_count": 17,
+   "data_sha256": "9f2c1a1a1a1a1a1a1a1a1a1a1a1a1a1a1a1a1a1a1a1a1a1a1a1a1a1a1a1a1a1a",
+   "file_sha256": "4be1c3c3c3c3c3c3c3c3c3c3c3c3c3c3c3c3c3c3c3c3c3c3c3c3c3c3c3c3c3c3",
+   "size": 184233,
+   "error": null,
+   "download_url": "/api/v1/reports/a3e1c2d4-5b6f-4a70-8b9c-0d1e2f3a4b5c/download"
+  },
+  {
+   "id": "e1f2a3b4-c5d6-4e7f-8a9b-0c1d2e3f4a5b",
+   "number": "RAP-ALFA-2026-0002",
+   "kind": "register",
+   "format": "pdf",
+   "status": "failed",
+   "company_id": "86282fd9-8f4f-4ca0-870a-8c0e20c33712",
+   "company": {
+    "id": "86282fd9-8f4f-4ca0-870a-8c0e20c33712",
+    "name": "Alfa S.A.",
+    "prefix": "ALFA"
+   },
+   "companies": [
+    {
+     "id": "86282fd9-8f4f-4ca0-870a-8c0e20c33712",
+     "name": "Alfa S.A.",
+     "prefix": "ALFA"
+    }
+   ],
+   "change_id": null,
+   "change_number": null,
+   "period_from": "2026-09-30T22:00:00.000000Z",
+   "period_to": "2026-11-01T23:00:00.000000Z",
+   "filters": {
+    "period_by": "created",
+    "status": [],
+    "type": [],
+    "category": [],
+    "ci": [],
+    "assignee": null,
+    "approver": null,
+    "approved_by": null,
+    "q": null
+   },
+   "include_audit_trail": false,
+   "generated_by": {
+    "id": "0b7e2a43-6f8c-4d2e-a1f0-3c9d5e7b8a10",
+    "display_name": "Alicja Audytorka"
+   },
+   "created_at": "2026-11-02T14:03:00.000000Z",
+   "completed_at": "2026-11-02T14:05:10.000000Z",
+   "change_count": 230,
+   "data_sha256": null,
+   "file_sha256": null,
+   "size": null,
+   "error": "Utracono uprawnienie do eksportu raportu rejestru przed wygenerowaniem raportu.",
+   "download_url": null
+  },
+  {
+   "id": "f0e1d2c3-b4a5-4697-8879-6a5b4c3d2e1f",
+   "number": "RAP-ALFA-2026-0001",
+   "kind": "change_card",
+   "format": "pdf",
+   "status": "done",
+   "company_id": "86282fd9-8f4f-4ca0-870a-8c0e20c33712",
+   "company": {
+    "id": "86282fd9-8f4f-4ca0-870a-8c0e20c33712",
+    "name": "Alfa S.A.",
+    "prefix": "ALFA"
+   },
+   "companies": [
+    {
+     "id": "86282fd9-8f4f-4ca0-870a-8c0e20c33712",
+     "name": "Alfa S.A.",
+     "prefix": "ALFA"
+    }
+   ],
+   "change_id": "4a5096c0-b9e3-403e-9c83-6bb701778848",
+   "change_number": "CHG-ALFA-2026-0017",
+   "period_from": null,
+   "period_to": null,
+   "filters": {},
+   "include_audit_trail": false,
+   "generated_by": {
+    "id": "3f6a9d21-7c4b-4e8f-b2a1-9d0c8e7f6a54",
+    "display_name": "Ewa Edytorska"
+   },
+   "created_at": "2026-11-01T10:00:00.000000Z",
+   "completed_at": "2026-11-01T10:00:01.000000Z",
+   "change_count": 1,
+   "data_sha256": "9f2c1a1a1a1a1a1a1a1a1a1a1a1a1a1a1a1a1a1a1a1a1a1a1a1a1a1a1a1a1a1a",
+   "file_sha256": "4be1c3c3c3c3c3c3c3c3c3c3c3c3c3c3c3c3c3c3c3c3c3c3c3c3c3c3c3c3c3c3",
+   "size": 184233,
+   "error": null,
+   "download_url": "/api/v1/reports/f0e1d2c3-b4a5-4697-8879-6a5b4c3d2e1f/download"
+  },
+  {
+   "id": "c7d8e9f0-1a2b-4c3d-8e4f-5a6b7c8d9e0f",
+   "number": "RAP-2026-0001",
+   "kind": "register",
+   "format": "pdf",
+   "status": "pending",
+   "company_id": null,
+   "company": null,
+   "companies": [
+    {
+     "id": "86282fd9-8f4f-4ca0-870a-8c0e20c33712",
+     "name": "Alfa S.A.",
+     "prefix": "ALFA"
+    },
+    {
+     "id": "5d1c5f0e-3a4b-4c55-9d1e-2f1a7b0c9e21",
+     "name": "Beta sp. z o.o.",
+     "prefix": "BETA"
+    }
+   ],
+   "change_id": null,
+   "change_number": null,
+   "period_from": "2026-09-30T22:00:00.000000Z",
+   "period_to": "2026-11-01T23:00:00.000000Z",
+   "filters": {
+    "period_by": "created",
+    "status": [],
+    "type": [],
+    "category": [],
+    "ci": [],
+    "assignee": null,
+    "approver": null,
+    "approved_by": null,
+    "q": null
+   },
+   "include_audit_trail": false,
+   "generated_by": {
+    "id": "0b7e2a43-6f8c-4d2e-a1f0-3c9d5e7b8a10",
+    "display_name": "Alicja Audytorka"
+   },
+   "created_at": "2026-11-03T09:15:02.123456Z",
+   "completed_at": null,
+   "change_count": 412,
+   "data_sha256": null,
+   "file_sha256": null,
+   "size": null,
+   "error": null,
+   "download_url": null
+  }
+ ],
+ "total": 5,
+ "limit": 20,
+ "offset": 0
+}

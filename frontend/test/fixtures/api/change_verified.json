@@ -1,0 +1,92 @@
+{
+ "id": "e41ce831-5253-4e52-bd0f-31059e6c686f",
+ "company_id": "86282fd9-8f4f-4ca0-870a-8c0e20c33712",
+ "number": "CHG-ALFA-2026-0017",
+ "title": "E2E: reguła zapory dla serwera WWW",
+ "status": "verified",
+ "change_type": "normal",
+ "risk": "high",
+ "category": {
+  "id": "f27360a6-7333-476a-b47b-a541c5dcbe8c",
+  "code": "FW",
+  "name": "Firewall / sieć"
+ },
+ "subcategory": null,
+ "ci": [
+  {
+   "id": "b3063a93-a6bb-4d56-9d14-be44d33858f7",
+   "identifier": "ADM-JKOWALSKI",
+   "name": "Konto administracyjne adm.jkowalski",
+   "ci_type_code": "account",
+   "is_active": true,
+   "snapshot": true,
+   "current_identifier": "ADM-JKOWALSKI",
+   "current_name": "Konto administracyjne adm.jkowalski",
+   "owner": null,
+   "consented": false
+  }
+ ],
+ "requested_by": {
+  "id": "49561563-057e-41f8-867f-711b9384f189",
+  "display_name": "Ewa Edytorska"
+ },
+ "assignee": {
+  "id": "49561563-057e-41f8-867f-711b9384f189",
+  "display_name": "Ewa Edytorska"
+ },
+ "approver": {
+  "id": "ece4b2f9-0e39-472a-825e-3cc76b6885bd",
+  "display_name": "Jan Zatwierdzający"
+ },
+ "verifier": {
+  "id": "ece4b2f9-0e39-472a-825e-3cc76b6885bd",
+  "display_name": "Jan Zatwierdzający"
+ },
+ "window_start": "2026-11-01T06:25:15.338753Z",
+ "window_end": "2026-11-01T08:25:15.338753Z",
+ "approved_at": "2026-10-30T06:25:33.785598Z",
+ "approved_by": {
+  "id": "ece4b2f9-0e39-472a-825e-3cc76b6885bd",
+  "display_name": "Jan Zatwierdzający"
+ },
+ "auto_approved": false,
+ "implemented_at": "2026-10-30T06:25:37.868088Z",
+ "verified_at": "2026-10-30T06:25:41.966676Z",
+ "rejected_at": null,
+ "deviations": [
+  {
+   "kind": "implemented_outside_window",
+   "critical": false,
+   "message_pl": "Zmiana wdrożona poza zatwierdzonym oknem serwisowym."
+  }
+ ],
+ "created_at": "2026-10-30T06:25:11.265828Z",
+ "updated_at": "2026-10-30T06:25:41.966676Z",
+ "description": "Otwarcie portu 443 — test scenariusza E2E.",
+ "implementation_plan": "1. Kopia konfiguracji. 2. Reguła. 3. Test.",
+ "rollback_plan": "Przywrócenie kopii konfiguracji.",
+ "impact": null,
+ "requirement_ref": "ISO/IEC 27001:2022 A.8.32",
+ "ticket_ref": "SD-E2E",
+ "supersedes_change_id": null,
+ "supersedes_number": null,
+ "superseded_by": [],
+ "version": 7,
+ "allowed_actions": [],
+ "editable_fields": [],
+ "access": "member",
+ "suggested_approver_id": null,
+ "consents": [],
+ "comments": [
+  {
+   "id": "1f738faa-c877-4545-a411-54a802305028",
+   "author": {
+    "id": "ece4b2f9-0e39-472a-825e-3cc76b6885bd",
+    "display_name": "Jan Zatwierdzający"
+   },
+   "body": "Zatwierdzam.",
+   "action": "approve",
+   "created_at": "2026-10-30T06:25:33.785598Z"
+  }
+ ]
+}

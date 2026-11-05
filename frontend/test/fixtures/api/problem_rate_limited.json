@@ -1,0 +1,8 @@
+{
+ "type": "urn:rejestr:problem:request.rate_limited",
+ "title": "Zbyt wiele żądań",
+ "status": 429,
+ "code": "request.rate_limited",
+ "detail": "Przekroczono limit żądań. Odczekaj chwilę i spróbuj ponownie.",
+ "request_id": "7d0c1d52-31f4-4c1b-8d55-0b3e5b6a9c22"
+}

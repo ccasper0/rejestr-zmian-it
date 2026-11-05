@@ -1,0 +1,9 @@
+{
+ "type": "urn:rejestr:problem:user.last_admin",
+ "title": "Konflikt",
+ "status": 409,
+ "detail": "To ostatni aktywny administrator aplikacji - nie można go dezaktywować ani odebrać mu roli.",
+ "code": "user.last_admin",
+ "instance": "/api/v1/users/ce62f7b9-d384-4c11-bdd3-66f13d856302",
+ "request_id": "7d0c1d52-31f4-4c1b-8d55-0b3e5b6a9c21"
+}

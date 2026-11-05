@@ -1,0 +1,124 @@
+[project]
+name = "rejestr-zmian-backend"
+version = "0.1.0"
+description = "Rejestr zmian administracyjnych IT - backend API"
+readme = "README.md"
+requires-python = ">=3.12"
+license = "Apache-2.0"
+dependencies = [
+    "fastapi>=0.121",  # Depends(..., scope="function") - see app/db.py SessionDep
+    "uvicorn[standard]>=0.32",
+    "pydantic>=2.9",
+    "pydantic-settings>=2.7",
+    "sqlalchemy[asyncio]>=2.0.36",
+    "asyncpg>=0.30",
+    "alembic>=1.14",
+    "arq>=0.26",
+    "redis>=5.2",
+    "jinja2>=3.1",
+    "python-multipart>=0.0.12",
+    "pyjwt>=2.10",  # access tokens (HS256): local accounts and dev login (ADR 0018)
+    "tzdata>=2024.1",  # Europe/Warsaw for report dates on systems without a tz database
+    "argon2-cffi>=23.1",  # password hashes (argon2id, ADR 0018)
+]
+
+[project.optional-dependencies]
+# WeasyPrint needs native Pango/HarfBuzz at import time. Installation (pure-Python
+# wheels) works everywhere, but on Windows importing it requires GTK runtime,
+# so it lives in an extra that the Docker image always installs.
+reports = [
+    "weasyprint>=70",  # URLFetcher class API (app.reports.render)
+]
+
+[dependency-groups]
+dev = [
+    "pytest>=8.3",
+    "pytest-asyncio>=0.24",
+    "pytest-cov>=6.0",
+    "httpx>=0.28",
+    "testcontainers[postgres]>=4.9",
+    "ruff>=0.8",
+    "mypy>=1.13",
+    "pypdf>=5.0",  # text extraction of generated PDF reports in tests
+]
+
+[build-system]
+requires = ["hatchling"]
+build-backend = "hatchling.build"
+
+[tool.hatch.build.targets.wheel]
+packages = ["app"]
+
+# ---------------------------------------------------------------- ruff
+[tool.ruff]
+line-length = 100
+target-version = "py312"
+extend-exclude = ["alembic/versions"]
+
+[tool.ruff.lint]
+select = [
+    "E", "W",   # pycodestyle
+    "F",        # pyflakes
+    "I",        # isort
+    "B",        # bugbear
+    "UP",       # pyupgrade
+    "N",        # pep8-naming
+    "S",        # bandit (security)
+    "ASYNC",    # async pitfalls
+    "C4",       # comprehensions
+    "SIM",      # simplify
+    "RUF",      # ruff-specific
+    "PT",       # pytest style
+    "DTZ",      # naive datetimes (UTC everywhere)
+    "T20",      # no print in app code
+]
+ignore = [
+    "B008",     # FastAPI Depends() in defaults is idiomatic
+]
+
+[tool.ruff.lint.per-file-ignores]
+"tests/**" = ["S101", "S105", "S106"]
+"app/cli.py" = ["T201"]
+"alembic/**" = ["T201"]
+
+[tool.ruff.lint.flake8-bugbear]
+extend-immutable-calls = ["fastapi.Depends", "fastapi.Query", "fastapi.Header"]
+
+# ---------------------------------------------------------------- mypy
+[tool.mypy]
+python_version = "3.12"
+plugins = ["pydantic.mypy"]
+warn_unused_configs = true
+warn_redundant_casts = true
+warn_unused_ignores = true
+warn_return_any = true
+check_untyped_defs = true
+disallow_untyped_defs = true
+no_implicit_optional = true
+strict_equality = true
+
+[[tool.mypy.overrides]]
+module = ["app.domain.*", "app.services.*"]
+strict = true
+
+[[tool.mypy.overrides]]
+module = ["arq.*"]
+ignore_missing_imports = true
+
+# ---------------------------------------------------------------- pytest
+[tool.pytest.ini_options]
+asyncio_mode = "auto"
+asyncio_default_fixture_loop_scope = "function"
+testpaths = ["tests"]
+addopts = "-ra --strict-markers"
+markers = [
+    "db: requires Docker (testcontainers PostgreSQL); skipped when Docker is unavailable",
+    "pdf: renders a real PDF (WeasyPrint + Pango); skipped when WeasyPrint cannot be imported",
+]
+
+[tool.coverage.run]
+source = ["app"]
+branch = true
+# SQLAlchemy's asyncio layer runs code in greenlets; without this, lines after awaited
+# database calls are reported as not covered.
+concurrency = ["greenlet", "thread"]

@@ -1,0 +1,268 @@
+name: CI
+
+on:
+  push:
+    branches: [main]
+  pull_request:
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+concurrency:
+  group: ci-${{ github.ref }}
+  cancel-in-progress: true
+
+jobs:
+  backend:
+    name: Backend (ruff, mypy, pytest) - Python ${{ matrix.python-version }}
+    runs-on: ubuntu-24.04
+    timeout-minutes: 40
+    strategy:
+      fail-fast: false
+      matrix:
+        # 3.12 = minimum (pyproject requires-python), 3.13 = Docker image and
+        # backend/.python-version.
+        python-version: ["3.12", "3.13"]
+    defaults:
+      run:
+        working-directory: backend
+    # No APP_ENV / AUTH_MODE here on purpose: tests build their own settings
+    # via make_settings(); setting AUTH_MODE=dev without DEV_AUTH_SECRET would
+    # make `import app.main` fail while loading conftest.
+    # Tests marked `db` start PostgreSQL 16 via testcontainers (Docker is
+    # available on GitHub-hosted Ubuntu runners) - no service container needed.
+    steps:
+      - uses: actions/checkout@v7
+
+      - name: Set up uv + Python ${{ matrix.python-version }}
+        uses: astral-sh/setup-uv@v7
+        with:
+          # Sets UV_PYTHON, which takes precedence over backend/.python-version.
+          python-version: ${{ matrix.python-version }}
+          enable-cache: true
+          cache-dependency-glob: |
+            backend/uv.lock
+            backend/pyproject.toml
+
+      # WeasyPrint (PDF reports, tests marked `pdf`) needs Pango/HarfBuzz at import time.
+      - name: Install WeasyPrint system libraries
+        run: |
+          sudo apt-get update
+          sudo apt-get install -y --no-install-recommends \
+            libpango-1.0-0 libpangoft2-1.0-0 libharfbuzz0b libharfbuzz-subset0 \
+            libfontconfig1 shared-mime-info
+
+      - name: Install dependencies
+        run: uv sync --all-extras
+
+      - name: ruff check
+        run: uv run ruff check .
+
+      - name: ruff format --check
+        run: uv run ruff format --check .
+
+      - name: mypy
+        run: uv run mypy app
+
+      - name: pytest
+        env:
+          REQUIRE_WEASYPRINT: "1"  # PDF report tests must run here (no silent skip)
+        run: uv run pytest -q
+
+  frontend:
+    name: Frontend (analyze, test, build web)
+    runs-on: ubuntu-24.04
+    timeout-minutes: 25
+    defaults:
+      run:
+        working-directory: frontend
+    steps:
+      - uses: actions/checkout@v7
+
+      - name: Set up Flutter (stable)
+        uses: subosito/flutter-action@v2
+        with:
+          channel: stable
+          flutter-version: 3.47.5  # keep in sync with frontend/Dockerfile
+          cache: true
+
+      - name: flutter pub get
+        run: flutter pub get
+
+      - name: Code generation (build_runner)
+        run: |
+          if grep -Eq '^[[:space:]]+build_runner:' pubspec.yaml; then
+            dart run build_runner build
+          fi
+
+      - name: flutter analyze
+        run: flutter analyze
+
+      - name: flutter test
+        run: flutter test
+
+      - name: flutter build web
+        # Same flags as frontend/Dockerfile: CSP-compatible output, CanvasKit served locally.
+        run: flutter build web --release --csp --no-web-resources-cdn --no-wasm-dry-run --dart-define=API_URL=
+
+  docker-compose:
+    name: Docker Compose (build, up, smoke tests)
+    runs-on: ubuntu-24.04
+    timeout-minutes: 45
+    env:
+      # Base file + CI override with BuildKit GHA cache (deploy/ci/).
+      COMPOSE_FILE: docker-compose.yml:deploy/ci/docker-compose.ci.yml
+    steps:
+      - uses: actions/checkout@v7
+
+      - name: Set up Docker Buildx
+        uses: docker/setup-buildx-action@v4
+
+      - name: Expose GitHub runtime for BuildKit cache (type=gha)
+        uses: crazy-max/ghaction-github-runtime@v4
+
+      - name: Prepare .env from .env.example (dev auth for smoke tests)
+        # .env.example holds production defaults (APP_ENV=prod, AUTH_MODE=local
+        # with an empty AUTH_JWT_SECRET), on which the API refuses to start. The smoke
+        # test runs in dev mode with a fresh random DEV_AUTH_SECRET; later
+        # assignments in .env win over the ones copied from .env.example.
+        run: |
+          cp .env.example .env
+          {
+            echo "APP_ENV=dev"
+            echo "AUTH_MODE=dev"
+            echo "DEV_AUTH_SECRET=$(openssl rand -hex 32)"
+          } >> .env
+
+      - name: docker compose config
+        run: docker compose config --quiet
+
+      - name: Build and start the stack (wait for healthchecks)
+        run: docker compose up -d --build --wait --wait-timeout 300
+
+      - name: Health via nginx (web -> api)
+        run: curl -fsS --retry 5 --retry-delay 2 --retry-all-errors http://localhost:8080/api/v1/health
+
+      - name: Health directly on api (127.0.0.1:8000)
+        run: curl -fsS --retry 5 --retry-delay 2 --retry-all-errors http://localhost:8000/api/v1/health
+
+      - name: SPA deep link falls back to index.html
+        run: |
+          body="$(curl -fsS http://localhost:8080/c/ALFA/changes)"
+          echo "$body" | grep -qi '<!DOCTYPE html>' || { echo "Expected index.html, got:"; echo "$body" | head -20; exit 1; }
+
+      - name: Spoofed X-Forwarded-For is not trusted
+        run: |
+          curl -fsS -H 'X-Forwarded-For: 6.6.6.6' http://localhost:8080/api/v1/health > /dev/null
+          curl -fsS -H 'X-Forwarded-For: 6.6.6.6' http://localhost:8000/api/v1/health > /dev/null
+          sleep 1
+          if docker compose logs --no-color api | grep -F '6.6.6.6'; then
+            echo "::error::API trusted a client-supplied X-Forwarded-For (6.6.6.6 in api logs)"
+            exit 1
+          fi
+          echo "OK: 6.6.6.6 not present in api logs"
+
+      - name: Seed sample data
+        run: docker compose exec -T api python -m app.cli seed
+
+      - name: GET /me without a token is rejected (401)
+        run: |
+          code="$(curl -sS -o /tmp/me-anon.json -w '%{http_code}' http://localhost:8080/api/v1/me)"
+          cat /tmp/me-anon.json; echo
+          [ "$code" = "401" ] || { echo "::error::Expected 401 without token, got $code"; exit 1; }
+
+      - name: Dev token via nginx + GET /me (200)
+        run: |
+          token="$(curl -fsS -X POST http://localhost:8080/api/v1/auth/dev/token \
+            -H 'Content-Type: application/json' \
+            -d '{"external_id":"dev-editor"}' | jq -er '.access_token')"
+          code="$(curl -sS -o /tmp/me.json -w '%{http_code}' \
+            -H "Authorization: Bearer ${token}" http://localhost:8080/api/v1/me)"
+          cat /tmp/me.json; echo
+          [ "$code" = "200" ] || { echo "::error::Expected 200 from /me with token, got $code"; exit 1; }
+          jq -e '.external_id == "dev-editor"' < /tmp/me.json > /dev/null \
+            || { echo "::error::/me did not return dev-editor"; exit 1; }
+
+      - name: Security headers and local CanvasKit (ADR 0019)
+        run: |
+          check() {  # $1 = URL, $2.. = required header regexes (case-insensitive)
+            headers="$(curl -fsS -D - -o /dev/null "$1")"
+            shift_url="$1"; shift
+            for h in "$@"; do
+              echo "$headers" | grep -Eiq "$h" || { echo "::error::$shift_url: missing $h"; echo "$headers"; exit 1; }
+            done
+          }
+          check http://localhost:8080/ \
+            "^content-security-policy: default-src 'self'; script-src 'self' 'wasm-unsafe-eval';" \
+            '^x-content-type-options: nosniff' '^referrer-policy: ' '^permissions-policy: ' \
+            '^x-frame-options: DENY' '^cross-origin-opener-policy: same-origin'
+          check http://localhost:8080/api/v1/health \
+            "^content-security-policy: default-src 'none'" '^x-content-type-options: nosniff' \
+            '^cache-control: no-store'
+          if curl -fsS -D - -o /dev/null http://localhost:8080/ | grep -iq '^strict-transport-security'; then
+            echo "::error::HSTS must not be sent over plain HTTP by default"; exit 1
+          fi
+          curl -fsS -D - -o /dev/null http://localhost:8080/canvaskit/canvaskit.wasm \
+            | grep -iq '^content-type: application/wasm'
+          curl -fsS http://localhost:8080/flutter_bootstrap.js | grep -qF '"useLocalCanvasKit":true'
+
+      - name: Attachment whitelist by content (415 attachment.type_not_allowed)
+        run: |
+          token="$(curl -fsS -X POST http://localhost:8080/api/v1/auth/dev/token \
+            -H 'Content-Type: application/json' \
+            -d '{"external_id":"dev-editor"}' | jq -er '.access_token')"
+          auth="Authorization: Bearer ${token}"
+          company="$(curl -fsS -H "$auth" http://localhost:8080/api/v1/companies \
+            | jq -er '(.items // .) | map(select(.prefix == "ALFA")) | .[0].id')"
+          change="$(curl -fsS -H "$auth" \
+            "http://localhost:8080/api/v1/companies/${company}/changes?status=draft&limit=1" \
+            | jq -er '.items[0].id')"
+          url="http://localhost:8080/api/v1/companies/${company}/changes/${change}/attachments"
+          printf 'MZ\x90\x00\x03\x00\x00\x00' > /tmp/fake.pdf
+          code="$(curl -sS -o /tmp/415.json -w '%{http_code}' -H "$auth" \
+            -F 'file=@/tmp/fake.pdf;type=application/pdf' "$url")"
+          cat /tmp/415.json; echo
+          [ "$code" = "415" ] && jq -e '.code == "attachment.type_not_allowed"' /tmp/415.json > /dev/null \
+            || { echo "::error::Expected 415 attachment.type_not_allowed, got $code"; exit 1; }
+          printf '%%PDF-1.4\n%%test\n' > /tmp/ok.pdf
+          code="$(curl -sS -o /tmp/201.json -w '%{http_code}' -H "$auth" \
+            -F 'file=@/tmp/ok.pdf;type=application/octet-stream' "$url")"
+          [ "$code" = "201" ] && jq -e '.content_type == "application/pdf"' /tmp/201.json > /dev/null \
+            || { echo "::error::Expected 201 application/pdf, got $code"; cat /tmp/201.json; exit 1; }
+
+      - name: JSON application logs with request_id
+        run: |
+          line="$(docker compose logs --no-color --no-log-prefix api | grep '"logger": "app.access"' | tail -n1)"
+          echo "$line"
+          echo "$line" | jq -e '.request_id and .status and .path and .timestamp' > /dev/null
+          if docker compose logs --no-color api | grep -F 'eyJ'; then
+            echo "::error::a JWT leaked into the api logs"; exit 1
+          fi
+
+      # Last: exhausts the per-IP limit of the credentials endpoints.
+      - name: Rate limiting returns 429 problem+json
+        run: |
+          for i in $(seq 1 40); do
+            code="$(curl -sS -o /tmp/429.json -w '%{http_code}' -X POST \
+              http://localhost:8080/api/v1/auth/dev/token \
+              -H 'Content-Type: application/json' -d '{"external_id":"dev-editor"}')"
+            [ "$code" = "429" ] && break
+          done
+          cat /tmp/429.json; echo
+          [ "$code" = "429" ] || { echo "::error::No 429 after 40 login attempts"; exit 1; }
+          jq -e '.code == "request.rate_limited" and .status == 429' /tmp/429.json > /dev/null
+          curl -sS -D - -o /dev/null -X POST http://localhost:8080/api/v1/auth/dev/token \
+            | grep -iq '^content-type: application/problem+json'
+
+      - name: Container status
+        if: always()
+        run: docker compose ps -a
+
+      - name: Logs on failure
+        if: failure()
+        run: docker compose logs --no-color --timestamps
+
+      - name: Tear down
+        if: always()
+        run: docker compose down -v --remove-orphans

@@ -1,0 +1,107 @@
+{% extends "_layout.html" %}
+{% block title %}Karta zmiany{% endblock %}
+{% block running_title %}Karta zmiany {{ data.change.number }}{% endblock %}
+
+{% block body %}
+{% set ch = data.change %}
+<div class="muted small">{{ data.company.name }} (<span class="mono">{{ data.company.prefix }}</span>) · Karta zmiany</div>
+<h1><span class="mono">{{ ch.number }}</span> — {{ ch.title | or_dash }}</h1>
+<p>
+  <span class="pill st-{{ ch.status }}">{{ ch.status | status }}</span>
+  &nbsp;Typ: {% if ch.change_type == "emergency" %}<span class="type-emergency">{{ ch.change_type | change_type }}</span>{% else %}{{ ch.change_type | change_type }}{% endif %}
+  &nbsp;· Ryzyko: {{ ch.risk | risk }}
+  {% if ch.supersedes_number %}&nbsp;· Korekta zmiany <span class="mono">{{ ch.supersedes_number }}</span>{% endif %}
+</p>
+<table class="meta">
+  <tr><td class="k">Numer raportu</td><td class="mono">{{ data.number }}</td></tr>
+  <tr><td class="k">Wygenerowano</td><td><span class="mono">{{ data.generated_at | dt }}</span> (czas polski), {{ data.generated_by.name }}</td></tr>
+</table>
+
+{% for d in data.deviations %}
+  {% if d.critical %}
+  <div class="critical"><span class="title">BŁĄD KRYTYCZNY:</span> {{ d.message }}</div>
+  {% else %}
+  <div class="box"><span class="bad">Odstępstwo:</span> {{ d.message }}</div>
+  {% endif %}
+{% endfor %}
+
+<h2>Klasyfikacja i osoby</h2>
+<table class="meta">
+  <tr><td class="k">Spółka</td><td>{{ data.company.name }}{% if data.company.is_ksc_entity %} (podmiot objęty uoKSC){% endif %}</td></tr>
+  <tr><td class="k">Kategoria</td><td>{{ ch.category | or_dash }}{% if ch.subcategory %} / {{ ch.subcategory }}{% endif %}</td></tr>
+  <tr><td class="k">Zgłaszający</td><td>{{ ch.requested_by | or_dash }}</td></tr>
+  <tr><td class="k">Wykonawca</td><td>{{ ch.assignee | or_dash }}</td></tr>
+  <tr><td class="k">Zatwierdzający (wskazany)</td><td>{{ ch.approver | or_dash }}</td></tr>
+  <tr><td class="k">Zatwierdził</td><td>{{ ch.approved_by | or_dash }}{% if ch.approved_at %} · <span class="mono">{{ ch.approved_at | dt }}</span>{% endif %}</td></tr>
+  <tr><td class="k">Weryfikujący</td><td>{{ ch.verifier | or_dash }}{% if ch.verified_at %} · zweryfikowano <span class="mono">{{ ch.verified_at | dt }}</span>{% endif %}</td></tr>
+  <tr><td class="k">Okno serwisowe</td><td class="mono">{{ ch.window_start | dt }} – {{ ch.window_end | dt }}</td></tr>
+  <tr><td class="k">Zarejestrowano</td><td class="mono">{{ ch.created_at | dt }}</td></tr>
+  <tr><td class="k">Wdrożono</td><td class="mono">{{ ch.implemented_at | dt }}</td></tr>
+  {% if ch.rejected_at %}<tr><td class="k">Odrzucono</td><td class="mono">{{ ch.rejected_at | dt }}</td></tr>{% endif %}
+  <tr><td class="k">Zgłoszenie</td><td class="mono">{{ ch.ticket_ref | or_dash }}</td></tr>
+  <tr><td class="k">Podstawa / wymóg</td><td>{{ ch.requirement_ref | or_dash }}</td></tr>
+  {% if ch.supersedes_number %}<tr><td class="k">Korekta zmiany</td><td class="mono">{{ ch.supersedes_number }}</td></tr>{% endif %}
+  {% if ch.superseded_by %}<tr><td class="k">Skorygowana przez</td><td>{% for c in ch.superseded_by %}<span class="mono">{{ c.number }}</span> ({{ c.status | status }}){% if not loop.last %}, {% endif %}{% endfor %}</td></tr>{% endif %}
+  <tr><td class="k">Wersja rekordu</td><td class="mono">{{ ch.version }}</td></tr>
+</table>
+
+<h2>Opis zmiany</h2>
+<h3>Co i dlaczego</h3><p class="pre">{{ ch.description | or_dash }}</p>
+<h3>Plan wdrożenia</h3><p class="pre">{{ ch.implementation_plan | or_dash }}</p>
+<h3>Plan wycofania</h3><p class="pre">{{ ch.rollback_plan | or_dash }}</p>
+<h3>Wpływ</h3><p class="pre">{{ ch.impact | or_dash }}</p>
+
+<h2>Obiekty, których dotyczy</h2>
+<table>
+  <thead><tr><th>Identyfikator</th><th>Nazwa</th><th>Typ</th><th>Właściciel</th></tr></thead>
+  <tbody>
+  {% for ci in data.ci %}
+  <tr><td class="mono">{{ ci.identifier }}</td><td>{{ ci.name }}{% if ci.snapshot %} <span class="muted small">(stan z chwili wdrożenia)</span>{% endif %}</td><td>{{ ci.type }}</td><td>{{ ci.owner | or_dash }}</td></tr>
+  {% else %}
+  <tr><td colspan="4" class="muted">brak</td></tr>
+  {% endfor %}
+  </tbody>
+</table>
+{% if data.consents %}
+<h3>Zgody właścicieli CI</h3>
+<table><tbody>
+{% for c in data.consents %}<tr><td class="mono">{{ c.ci }}</td><td>{{ c.owner | or_dash }}</td><td class="mono">{{ c.at | dt }}</td><td>{{ "ważna" if c.valid else "nieważna (inny właściciel)" }}</td></tr>{% endfor %}
+</tbody></table>
+{% endif %}
+
+<h2>Oś czasu statusów</h2>
+<table>
+  <thead><tr><th>Status</th><th>Kiedy (zapis w dzienniku)</th><th>Kto</th></tr></thead>
+  <tbody>
+  {% for t in data.timeline %}
+  <tr><td><span class="pill st-{{ t.status }}">{{ t.status | status }}</span></td><td class="mono">{{ t.at | dt }}{% if t.simulated_at %} <span class="muted small">(symulowano {{ t.simulated_at | dt }})</span>{% endif %}</td><td>{{ t.actor }}</td></tr>
+  {% endfor %}
+  </tbody>
+</table>
+
+<h2>Załączniki</h2>
+<table>
+  <thead><tr><th>Plik</th><th class="num">Rozmiar (B)</th><th>Dodał</th><th>SHA-256</th></tr></thead>
+  <tbody>
+  {% for a in data.attachments %}
+  <tr><td>{{ a.filename }}<div class="muted small">{{ a.content_type }} · <span class="mono">{{ a.created_at | dt }}</span></div></td><td class="num mono">{{ a.size }}</td><td>{{ a.uploaded_by | or_dash }}</td><td class="hash">{{ a.sha256 }}</td></tr>
+  {% else %}
+  <tr><td colspan="4" class="muted">brak</td></tr>
+  {% endfor %}
+  </tbody>
+</table>
+
+{% if data.comments %}
+<h2>Komentarze</h2>
+{% for c in data.comments %}
+<div class="entry"><div class="head"><span class="mono">{{ c.created_at | dt }}</span> — <strong>{{ c.author | or_dash }}</strong>{% if c.action %} <span class="muted">(przy akcji: {{ c.action | action_noun }})</span>{% endif %}</div><div class="pre">{{ c.body }}</div></div>
+{% endfor %}
+{% endif %}
+
+<h2>Ścieżka audytu</h2>
+{% set v = data.chain_verification %}
+<p>Łańcuch audytu spółki w chwili generowania:
+  {% if v.ok %}<span class="ok">spójny</span>{% else %}<span class="bad">NARUSZONY od wpisu #{{ v.first_broken_seq }}</span>{% endif %}
+  — sprawdzono {{ v.checked }} wpisów, głowa <span class="mono">#{{ v.head_seq }}</span> <span class="hash">{{ v.head_hash }}</span></p>
+{% for e in data.audit_trail %}{% include "_audit_entry.html" %}{% else %}<p class="muted">Brak wpisów.</p>{% endfor %}
+{% endblock %}

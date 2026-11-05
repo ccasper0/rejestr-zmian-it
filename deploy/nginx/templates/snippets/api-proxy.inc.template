@@ -1,0 +1,46 @@
+# Reverse proxy to the API - included by every /api/ location (ADR 0004, ADR 0019).
+
+# Variable => resolved at request time via `resolver`. With a variable and no URI
+# part, the original request URI (/api/v1/...) is passed unchanged, which matches
+# the FastAPI prefix.
+set $api_upstream http://api:8000;
+proxy_pass $api_upstream;
+
+proxy_http_version 1.1;
+proxy_set_header Host $host;
+proxy_set_header X-Real-IP $remote_addr;
+# Single hop: the client-supplied X-Forwarded-For is DISCARDED and replaced by the
+# client address ($remote_addr - the TCP peer, or the address taken from a trusted
+# TLS proxy by the realip module, NGINX_TRUSTED_PROXIES). Appending
+# ($proxy_add_x_forwarded_for) would let clients spoof the IP recorded in
+# audit_log. uvicorn trusts these headers only from the nginx container address
+# (FORWARDED_ALLOW_IPS=172.28.0.10).
+proxy_set_header X-Forwarded-For $remote_addr;
+# Client-supplied X-Forwarded-Proto is honoured ONLY from NGINX_TRUSTED_PROXIES
+# ($forwarded_proto, default.conf); a direct client cannot claim "https".
+proxy_set_header X-Forwarded-Proto $forwarded_proto;
+proxy_set_header X-Forwarded-Host $host;
+# Same id in the nginx access log, the API logs and audit_log.request_id.
+proxy_set_header X-Request-ID $request_uuid;
+proxy_set_header Upgrade $http_upgrade;
+proxy_set_header Connection $connection_upgrade;
+
+proxy_connect_timeout 5s;
+proxy_read_timeout 120s;   # PDF generation for small reports is synchronous
+proxy_send_timeout 120s;
+proxy_request_buffering off;
+
+# API down / restarting -> problem+json instead of nginx's HTML page. error_page
+# is not inherited into a location that declares its own, hence 429/413 again.
+error_page 502 503 504 =503 @api_unavailable;
+error_page 429 @rate_limited;
+error_page 413 @too_large;
+
+# The download endpoint sets nosniff itself; nginx adds it to every response.
+proxy_hide_header X-Content-Type-Options;
+
+# API responses must never be cached by intermediaries.
+add_header Cache-Control "no-store" always;
+include /etc/nginx/conf.d/snippets/security-headers.inc;
+# JSON / file downloads only: nothing may be executed, embedded or framed.
+add_header Content-Security-Policy "default-src 'none'; frame-ancestors 'none'; base-uri 'none'; form-action 'none'" always;

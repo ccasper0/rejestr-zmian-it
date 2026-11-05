@@ -1,0 +1,16 @@
+{
+ "company_id": "86282fd9-8f4f-4ca0-870a-8c0e20c33712",
+ "chain": "company",
+ "ok": true,
+ "checked": 100,
+ "first_broken_seq": null,
+ "head_seq": 100,
+ "head_hash": "94c6631a16e39827c712aac4a1abd7188ab0104982412511bb1b5f03f9329d70",
+ "verified_at": "2026-10-30T13:38:57.473227Z",
+ "recorded_in": "chain",
+ "audit_entry": {
+  "company_id": "86282fd9-8f4f-4ca0-870a-8c0e20c33712",
+  "seq": 101,
+  "hash": "2d32f3c07ca499d9dcfa9a677ecd9665739dbc31ff99c9060edb9ccce1341dab"
+ }
+}

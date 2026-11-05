@@ -1,0 +1,17 @@
+<div class="entry">
+  <div class="head">
+    <span class="mono">#{{ e.seq }} · {{ e.occurred_at | dt }}{% if e.ip %} · {{ e.ip }}{% endif %}</span>
+    — <strong>{{ e.actor }}</strong>{% if e.roles %} <span class="muted">({{ e.roles | roles }})</span>{% endif %} — {{ e.phrase }}
+    {% if e.simulated_at %}<span class="muted small">(dane przykładowe, czas symulowany {{ e.simulated_at | dt }})</span>{% endif %}
+  </div>
+  {% if e.diff %}
+  <table class="diff"><tbody>
+    {% for d in e.diff %}
+    <tr><td class="muted" style="width: 36mm">{{ d.field }}</td><td><span class="before">{{ d.before }}</span> → <span class="after">{{ d.after }}</span></td></tr>
+    {% endfor %}
+  </tbody></table>
+  {% endif %}
+  {% if e.comment %}<div class="small pre">Komentarz: {{ e.comment }}</div>{% endif %}
+  {% if e.warnings %}<div class="small bad">Ostrzeżenia: {{ e.warnings | join(", ") }}</div>{% endif %}
+  <div class="hash muted">sha256 {{ e.hash }}{% if not e.hash_valid %} <span class="bad">— SKRÓT NIEZGODNY Z TREŚCIĄ WPISU</span>{% endif %}</div>
+</div>

@@ -1,0 +1,34 @@
+{
+ "items": [
+  {
+   "user_id": "5dfa3249-5bac-40c3-ab42-8b3d05938568",
+   "display_name": "Alicja Audytorka",
+   "email": "auditor@example.com",
+   "is_active": true,
+   "roles": [
+    "auditor"
+   ]
+  },
+  {
+   "user_id": "49561563-057e-41f8-867f-711b9384f189",
+   "display_name": "Ewa Edytorska",
+   "email": "editor@example.com",
+   "is_active": true,
+   "roles": [
+    "editor"
+   ]
+  },
+  {
+   "user_id": "ece4b2f9-0e39-472a-825e-3cc76b6885bd",
+   "display_name": "Jan Zatwierdzający",
+   "email": "approver@example.com",
+   "is_active": true,
+   "roles": [
+    "approver"
+   ]
+  }
+ ],
+ "total": 3,
+ "limit": 100,
+ "offset": 0
+}

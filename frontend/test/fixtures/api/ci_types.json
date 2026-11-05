@@ -1,0 +1,79 @@
+{
+ "items": [
+  {
+   "id": "54ee2c8e-81d1-4649-9a0a-3f6dc4ac68b6",
+   "code": "application",
+   "name": "Aplikacja",
+   "is_active": true,
+   "created_at": "2026-10-30T05:55:57.934354Z",
+   "updated_at": "2026-10-30T05:55:57.934354Z"
+  },
+  {
+   "id": "5dc9f26e-1d33-448a-ba7a-8352e00c86a2",
+   "code": "group",
+   "name": "Grupa",
+   "is_active": true,
+   "created_at": "2026-10-30T05:55:57.934354Z",
+   "updated_at": "2026-10-30T05:55:57.934354Z"
+  },
+  {
+   "id": "cb2310a4-4a7d-4e75-b4af-51398de19706",
+   "code": "other",
+   "name": "Inny",
+   "is_active": true,
+   "created_at": "2026-10-30T05:55:57.934354Z",
+   "updated_at": "2026-10-30T05:55:57.934354Z"
+  },
+  {
+   "id": "ffeffce8-7bd9-42da-aea8-b7cd3955e671",
+   "code": "account",
+   "name": "Konto",
+   "is_active": true,
+   "created_at": "2026-10-30T05:55:57.934354Z",
+   "updated_at": "2026-10-30T05:55:57.934354Z"
+  },
+  {
+   "id": "974e57ea-dc25-4c5b-ad5a-1c2a9381fa60",
+   "code": "vm",
+   "name": "Maszyna wirtualna",
+   "is_active": true,
+   "created_at": "2026-10-30T05:55:57.934354Z",
+   "updated_at": "2026-10-30T05:55:57.934354Z"
+  },
+  {
+   "id": "0d5819c6-7e24-4b28-8511-d1e4a374cc62",
+   "code": "server",
+   "name": "Serwer",
+   "is_active": true,
+   "created_at": "2026-10-30T05:55:57.934354Z",
+   "updated_at": "2026-10-30T05:55:57.934354Z"
+  },
+  {
+   "id": "bfb6bbbd-ce9f-47ab-bb99-9c511ee202e0",
+   "code": "ot_system",
+   "name": "System OT / przemysłowy",
+   "is_active": true,
+   "created_at": "2026-10-30T05:55:57.934354Z",
+   "updated_at": "2026-10-30T05:55:57.934354Z"
+  },
+  {
+   "id": "bccddac2-0119-4840-84bf-eedd115d5b9c",
+   "code": "network_device",
+   "name": "Urządzenie sieciowe",
+   "is_active": true,
+   "created_at": "2026-10-30T05:55:57.934354Z",
+   "updated_at": "2026-10-30T05:55:57.934354Z"
+  },
+  {
+   "id": "196e2d03-cf56-4cce-ad9c-8957d2a3d181",
+   "code": "firewall",
+   "name": "Zapora sieciowa (firewall)",
+   "is_active": true,
+   "created_at": "2026-10-30T05:55:57.934354Z",
+   "updated_at": "2026-10-30T05:55:57.934354Z"
+  }
+ ],
+ "total": 9,
+ "limit": 100,
+ "offset": 0
+}

@@ -1,0 +1,11 @@
+{
+ "change_count": 6120,
+ "max_changes": 5000,
+ "type": "urn:rejestr:problem:report.too_large",
+ "title": "Nieprawidłowe dane",
+ "status": 422,
+ "detail": "Raport obejmowałby 6120 zmian (maksymalnie 5000). Zawęź okres lub filtry.",
+ "code": "report.too_large",
+ "instance": "/api/v1/reports",
+ "request_id": "8c1f0f5e-2b7a-4d1e-9e3a-6f5b4c3d2a10"
+}

@@ -1,0 +1,160 @@
+{
+ "roles": [
+  "app_admin",
+  "approver",
+  "editor",
+  "auditor",
+  "viewer"
+ ],
+ "actions": [
+  {
+   "action": "company.manage",
+   "label": "Zarządzanie spółkami (dodaj, edytuj, archiwizuj)",
+   "note": "Także kategorie dostępne w spółce. Spółek się nie usuwa.",
+   "roles": [
+    "app_admin"
+   ]
+  },
+  {
+   "action": "dictionary.manage",
+   "label": "Słowniki globalne (kategorie, typy CI)",
+   "note": null,
+   "roles": [
+    "app_admin"
+   ]
+  },
+  {
+   "action": "membership.manage",
+   "label": "Przypisywanie ról w spółce",
+   "note": "Nadanie roli samemu sobie też trafia do dziennika audytu.",
+   "roles": [
+    "app_admin"
+   ]
+  },
+  {
+   "action": "ci.manage",
+   "label": "Inwentarz CI spółki (dodawanie, edycja)",
+   "note": "Bez usuwania — dezaktywacja.",
+   "roles": [
+    "app_admin",
+    "approver",
+    "editor"
+   ]
+  },
+  {
+   "action": "change.edit_draft",
+   "label": "Tworzenie i edycja zmian w szkicu",
+   "note": "Także wysłanie, wdrożenie, weryfikacja, wycofanie i anulowanie — zgodnie z rolą na zmianie (autor, wykonawca, weryfikujący).",
+   "roles": [
+    "approver",
+    "editor"
+   ]
+  },
+  {
+   "action": "change.assign",
+   "label": "Przypisywanie kategorii, CI, wykonawcy, zatwierdzającego",
+   "note": null,
+   "roles": [
+    "approver",
+    "editor"
+   ]
+  },
+  {
+   "action": "change.approve",
+   "label": "Zatwierdzanie, odrzucanie, zwrot do poprawy",
+   "note": "Nie własnych zmian (zasada czterech oczu).",
+   "roles": [
+    "approver"
+   ]
+  },
+  {
+   "action": "register.view",
+   "label": "Podgląd rejestru, kart, ścieżki audytu zmiany",
+   "note": "Administrator bez roli w spółce — tylko odczyt: bez akcji, edycji, komentarzy i pobierania plików załączników (widzi ich listę z sha256).",
+   "roles": [
+    "app_admin",
+    "approver",
+    "editor",
+    "auditor",
+    "viewer"
+   ]
+  },
+  {
+   "action": "export.register",
+   "label": "Eksport rejestru (PDF, CSV)",
+   "note": null,
+   "roles": [
+    "app_admin",
+    "approver",
+    "auditor"
+   ]
+  },
+  {
+   "action": "export.change_card",
+   "label": "Eksport karty zmiany (PDF)",
+   "note": null,
+   "roles": [
+    "app_admin",
+    "approver",
+    "editor",
+    "auditor"
+   ]
+  },
+  {
+   "action": "audit.verify",
+   "label": "Weryfikacja łańcucha audytu",
+   "note": null,
+   "roles": [
+    "app_admin",
+    "auditor"
+   ]
+  },
+  {
+   "action": "audit.read",
+   "label": "Przegląd całego dziennika audytu",
+   "note": null,
+   "roles": [
+    "app_admin",
+    "auditor"
+   ]
+  }
+ ],
+ "change_actions": [
+  {
+   "action": "submit",
+   "requires": "change.edit_draft"
+  },
+  {
+   "action": "cancel",
+   "requires": "change.edit_draft"
+  },
+  {
+   "action": "implement",
+   "requires": "change.edit_draft"
+  },
+  {
+   "action": "verify",
+   "requires": "change.edit_draft"
+  },
+  {
+   "action": "rollback",
+   "requires": "change.edit_draft"
+  },
+  {
+   "action": "approve",
+   "requires": "change.approve"
+  },
+  {
+   "action": "reject",
+   "requires": "change.approve"
+  },
+  {
+   "action": "return",
+   "requires": "change.approve"
+  },
+  {
+   "action": "consent",
+   "requires": "register.view"
+  }
+ ]
+}

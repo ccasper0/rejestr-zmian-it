@@ -1,0 +1,31 @@
+# Build outputs and local tool state
+build/
+.dart_tool/
+.flutter-plugins
+.flutter-plugins-dependencies
+.packages
+.pub-cache/
+.pub/
+
+# Platforms not needed for the web build
+android/
+ios/
+linux/
+macos/
+windows/
+
+# IDE / OS
+.idea/
+.vscode/
+*.iml
+*.swp
+.DS_Store
+Thumbs.db
+
+# Misc
+coverage/
+Dockerfile
+.dockerignore
+*.log
+.env
+.env.*

@@ -1,0 +1,164 @@
+{% extends "_layout.html" %}
+{% block title %}Raport rejestru zmian{% endblock %}
+{% block running_title %}Raport rejestru zmian{% endblock %}
+
+{% macro status_pill(value) %}<span class="pill st-{{ value }}">{{ value | status }}</span>{% endmacro %}
+{% macro type_cell(value) %}{% if value == "emergency" %}<span class="type-emergency">{{ value | change_type }}</span>{% else %}{{ value | change_type }}{% endif %}{% endmacro %}
+
+{% block body %}
+{# ------------------------------------------------------------------ 1. Header #}
+<h1>Raport rejestru zmian</h1>
+<table class="meta">
+  <tr><td class="k">Spółka</td><td>
+    {% if data.scope.aggregate %}
+      <strong>Wszystkie spółki (audytor)</strong>:
+      {% for c in data.scope.companies %}{{ c.name }} (<span class="mono">{{ c.prefix }}</span>){% if not loop.last %}, {% endif %}{% endfor %}
+    {% else %}
+      {% set c = data.scope.companies[0] %}<strong>{{ c.name }}</strong> (<span class="mono">{{ c.prefix }}</span>){% if c.tax_id %}, NIP <span class="mono">{{ c.tax_id }}</span>{% endif %}{% if c.is_ksc_entity %}, podmiot objęty uoKSC{% endif %}{% if c.status == "archived" %}, spółka zarchiwizowana{% endif %}
+    {% endif %}
+  </td></tr>
+  <tr><td class="k">Okres</td><td><span class="mono">{{ data.period.from | dt }}</span> – <span class="mono">{{ data.period.to | dt }}</span> <span class="muted">(koniec okresu wyłącznie; według: {{ PERIOD_BY_LABELS[data.period.by] }})</span></td></tr>
+  <tr><td class="k">Numer raportu</td><td class="mono">{{ data.number }}</td></tr>
+  <tr><td class="k">Wygenerowano</td><td><span class="mono">{{ data.generated_at | dt }}</span> (czas polski), {{ data.generated_by.name }}</td></tr>
+</table>
+
+{# ------------------------------------------------------------------ 2. Tiles #}
+<h2>Podsumowanie</h2>
+<div class="tiles">
+  <div class="tile"><div class="v">{{ data.tiles.total }}</div><div class="l">Liczba zmian</div></div>
+  <div class="tile"><div class="v">{{ data.tiles.approved_before_implementation }}<span class="muted small"> / {{ data.tiles.implemented }}</span></div><div class="l">Zatwierdzone przed wdrożeniem (z wdrożonych)</div></div>
+  <div class="tile{% if data.tiles.emergency %} alert{% endif %}"><div class="v">{{ data.tiles.emergency }}</div><div class="l">Awaryjne</div></div>
+  <div class="tile{% if data.tiles.not_verified %} alert{% endif %}"><div class="v">{{ data.tiles.not_verified }}</div><div class="l">Wdrożone bez weryfikacji</div></div>
+</div>
+
+{# ------------------------------------------------------------------ 3. Scope and filters #}
+<h2>Zakres i zastosowane filtry</h2>
+<table class="meta">
+  <tr><td class="k">Okres według</td><td>{{ PERIOD_BY_LABELS[data.period.by] }}</td></tr>
+  {% for f in data.filters %}
+  <tr><td class="k">{{ f.label }}</td><td>{{ f.value }}</td></tr>
+  {% else %}
+  <tr><td class="k">Filtry</td><td>brak — wszystkie zmiany z okresu</td></tr>
+  {% endfor %}
+  <tr><td class="k">Załącznik B</td><td>{{ "dołączony (pełna ścieżka audytu każdej zmiany)" if data.include_audit_trail else "nie dołączono" }}</td></tr>
+</table>
+
+{# ------------------------------------------------------------------ 4. Register #}
+<h2>Rejestr zmian</h2>
+{% if data.changes %}
+<table class="register">
+  <colgroup>
+    <col style="width: 25mm"><col><col style="width: 23mm"><col style="width: 17mm"><col style="width: 19mm"><col style="width: 21mm"><col style="width: 19mm"><col style="width: 21mm">
+  </colgroup>
+  <thead><tr>
+    <th>ID / status</th><th>Tytuł</th><th>Kategoria</th><th>Typ</th><th>Wykonawca</th><th>Zatwierdził</th><th>Wdrożenie</th><th>Weryfikacja</th>
+  </tr></thead>
+  <tbody>
+  {% for c in data.changes %}
+  <tr>
+    <td><span class="mono">{{ c.number }}</span><div>{{ status_pill(c.status) }}</div></td>
+    <td>{{ c.title | or_dash }}{% if c.ci %}<div class="muted mono">{{ c.ci | join(", ") }}</div>{% endif %}</td>
+    <td>{{ c.category | or_dash }}{% if c.subcategory %}<div class="muted">{{ c.subcategory }}</div>{% endif %}</td>
+    <td>{{ type_cell(c.change_type) }}</td>
+    <td>{{ c.assignee | or_dash }}</td>
+    <td>{{ c.approved_by | or_dash }}</td>
+    <td class="mono">{{ c.implemented_at | dt_lines }}</td>
+    <td>{% if c.verified_at %}<span class="mono">{{ c.verified_at | dt_lines }}</span><div class="muted">{{ c.verifier | or_dash }}</div>{% elif c.status == "implemented" %}<span class="bad">brak</span>{% else %}{{ EMPTY }}{% endif %}</td>
+  </tr>
+  {% endfor %}
+  </tbody>
+</table>
+{% else %}
+<p class="muted">Brak zmian spełniających kryteria raportu.</p>
+{% endif %}
+
+{# ------------------------------------------------------------------ 5. Deviations #}
+<h2>Odstępstwa</h2>
+{% for section in data.deviations %}
+  {% if section.critical %}
+    {% if section.changes %}
+    <div class="critical">
+      <div class="title">BŁĄD KRYTYCZNY: {{ DEVIATION_TITLES[section.kind] }} — {{ section.changes | length }}</div>
+      <p class="small">Zasada czterech oczu jest wymuszana przez aplikację i bazę danych — takie zmiany nie powinny wystąpić. Każdy przypadek wymaga wyjaśnienia.</p>
+      <table><tbody>
+      {% for d in section.changes %}
+        <tr><td class="mono small">{{ d.number }}</td><td>{{ d.title | or_dash }}</td><td class="small">{{ d.detail }}</td></tr>
+      {% endfor %}
+      </tbody></table>
+    </div>
+    {% else %}
+    <h3>{{ DEVIATION_TITLES[section.kind] }}: <span class="ok">brak</span></h3>
+    {% endif %}
+  {% else %}
+    <h3>{{ DEVIATION_TITLES[section.kind] }}: {% if section.changes %}<span class="bad">{{ section.changes | length }}</span>{% else %}<span class="ok">brak</span>{% endif %}</h3>
+    {% if section.changes %}
+    <table><tbody>
+    {% for d in section.changes %}
+      <tr><td class="mono small" style="width: 34mm">{{ d.number }}</td><td>{{ d.title | or_dash }}</td><td class="small">{{ d.detail }}</td></tr>
+    {% endfor %}
+    </tbody></table>
+    {% endif %}
+  {% endif %}
+{% endfor %}
+
+{# ------------------------------------------------------------------ 6. Appendix A #}
+<h2>Załącznik A. Zestawienie według kategorii i obiektów</h2>
+<div style="display: flex; gap: 6mm;">
+  <div style="flex: 1;">
+    <h3>Według kategorii</h3>
+    <table>
+      <thead><tr><th>Kategoria</th><th class="num">Zmiany</th></tr></thead>
+      <tbody>
+      {% for row in data.summary.by_category %}<tr><td>{{ row.label }}</td><td class="num">{{ row.count }}</td></tr>{% else %}<tr><td colspan="2" class="muted">brak</td></tr>{% endfor %}
+      </tbody>
+    </table>
+  </div>
+  <div style="flex: 1;">
+    <h3>Według obiektów (CI)</h3>
+    <table>
+      <thead><tr><th>Obiekt</th><th class="num">Zmiany</th></tr></thead>
+      <tbody>
+      {% for row in data.summary.by_ci %}<tr><td class="small">{{ row.label }}</td><td class="num">{{ row.count }}</td></tr>{% else %}<tr><td colspan="2" class="muted">brak</td></tr>{% endfor %}
+      </tbody>
+    </table>
+  </div>
+</div>
+
+{# ------------------------------------------------------------------ 7. Appendix B (optional) #}
+{% if data.include_audit_trail %}
+<h2 class="page-break">Załącznik B. Pełna ścieżka audytu zmian</h2>
+{% if data.audit_trails_truncated %}
+<p class="warning"><strong>Uwaga:</strong> ścieżka audytu {{ data.audit_trails_truncated }} zmian(y) została skrócona do {{ data.audit_trail_limit }} pierwszych wpisów na zmianę. Pełną ścieżkę zawiera karta zmiany (PDF).</p>
+{% endif %}
+{% for trail in data.audit_trails %}
+  <h3><span class="mono">{{ trail.number }}</span> — {{ trail.title | or_dash }}</h3>
+  {% for e in trail.entries %}{% include "_audit_entry.html" %}{% else %}<p class="muted">Brak wpisów.</p>{% endfor %}
+  {% if trail.truncated %}<p class="warning"><strong>Ścieżka skrócona:</strong> pominięto {{ trail.omitted }} późniejszych wpisów tej zmiany (limit {{ data.audit_trail_limit }}). Pełna ścieżka — karta zmiany.</p>{% endif %}
+{% else %}
+  <p class="muted">Brak zmian.</p>
+{% endfor %}
+{% endif %}
+
+{# ------------------------------------------------------------------ 8. Chain verification #}
+<h2>Weryfikacja łańcucha audytu w chwili generowania</h2>
+<table>
+  <thead><tr><th>Spółka</th><th>Wynik</th><th class="num">Sprawdzone wpisy</th><th>Głowa łańcucha (seq, sha256)</th></tr></thead>
+  <tbody>
+  {% for v in data.chain_verifications %}
+  <tr>
+    <td>{{ v.company }} (<span class="mono">{{ v.prefix }}</span>)</td>
+    <td>{% if v.ok %}<span class="ok">łańcuch spójny</span>{% else %}<span class="bad">NARUSZONY od wpisu #{{ v.first_broken_seq }}</span>{% endif %}</td>
+    <td class="num">{{ v.checked }}</td>
+    <td><span class="mono">#{{ v.head_seq }}</span> <span class="hash">{{ v.head_hash }}</span></td>
+  </tr>
+  {% endfor %}
+  </tbody>
+</table>
+<p class="small muted">Weryfikacja przeliczyła skróty SHA-256 wszystkich wpisów dziennika audytu spółki do podanej głowy łańcucha (<span class="mono">{{ data.generated_at | dt }}</span>). Skrót głowy w tym raporcie pozwala później wykazać, że historia sprzed jego wygenerowania nie została zmieniona.</p>
+
+{# ------------------------------------------------------------------ 9. Signatures #}
+<div class="signatures">
+  <div class="signature"><div class="line"></div><div class="cap">Sporządził (data, podpis)</div></div>
+  <div class="signature"><div class="line"></div><div class="cap">Zatwierdził (właściciel procesu) (data, podpis)</div></div>
+</div>
+{% endblock %}

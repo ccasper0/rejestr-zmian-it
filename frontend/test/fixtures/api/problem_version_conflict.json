@@ -1,0 +1,10 @@
+{
+ "current_version": 1,
+ "type": "urn:rejestr:problem:change.version_conflict",
+ "title": "Konflikt",
+ "status": 409,
+ "detail": "Zmiana została w międzyczasie zmodyfikowana przez kogoś innego. Odśwież kartę zmiany i wprowadź poprawki ponownie.",
+ "code": "change.version_conflict",
+ "instance": "/api/v1/companies/86282fd9-8f4f-4ca0-870a-8c0e20c33712/changes/4a5096c0-b9e3-403e-9c83-6bb701778848",
+ "request_id": "4f7c28f2-ebd9-424c-a7ed-5f6945d4daff"
+}

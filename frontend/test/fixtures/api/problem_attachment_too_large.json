@@ -1,0 +1,10 @@
+{
+ "type": "urn:rejestr:problem:attachment.too_large",
+ "title": "Zbyt duże żądanie",
+ "status": 413,
+ "detail": "Załącznik jest zbyt duży (maksymalnie 26214400 bajtów).",
+ "code": "attachment.too_large",
+ "instance": "/api/v1/companies/86282fd9-8f4f-4ca0-870a-8c0e20c33712/changes/4a5096c0-b9e3-403e-9c83-6bb701778848/attachments",
+ "request_id": "7d0c1d52-31f4-4c1b-8d55-0b3e5b6a9c21",
+ "max_bytes": 26214400
+}

@@ -1,0 +1,600 @@
+{
+ "items": [
+  {
+   "id": "e4ed7e71-6988-4b64-bcb2-fbf0e2290594",
+   "company_id": "86282fd9-8f4f-4ca0-870a-8c0e20c33712",
+   "number": "CHG-ALFA-2026-0018",
+   "title": null,
+   "status": "cancelled",
+   "change_type": null,
+   "risk": null,
+   "category": null,
+   "subcategory": null,
+   "ci": [],
+   "requested_by": {
+    "id": "49561563-057e-41f8-867f-711b9384f189",
+    "display_name": "Ewa Edytorska"
+   },
+   "assignee": null,
+   "approver": {
+    "id": "ece4b2f9-0e39-472a-825e-3cc76b6885bd",
+    "display_name": "Jan Zatwierdzający"
+   },
+   "verifier": null,
+   "window_start": null,
+   "window_end": null,
+   "approved_at": null,
+   "approved_by": null,
+   "auto_approved": false,
+   "implemented_at": null,
+   "verified_at": null,
+   "rejected_at": null,
+   "deviations": [],
+   "created_at": "2026-10-30T07:03:40.307680Z",
+   "updated_at": "2026-10-30T07:03:42.358888Z"
+  },
+  {
+   "id": "e41ce831-5253-4e52-bd0f-31059e6c686f",
+   "company_id": "86282fd9-8f4f-4ca0-870a-8c0e20c33712",
+   "number": "CHG-ALFA-2026-0017",
+   "title": "E2E: reguła zapory dla serwera WWW",
+   "status": "verified",
+   "change_type": "normal",
+   "risk": "high",
+   "category": {
+    "id": "f27360a6-7333-476a-b47b-a541c5dcbe8c",
+    "code": "FW",
+    "name": "Firewall / sieć"
+   },
+   "subcategory": null,
+   "ci": [
+    {
+     "id": "b3063a93-a6bb-4d56-9d14-be44d33858f7",
+     "identifier": "ADM-JKOWALSKI",
+     "name": "Konto administracyjne adm.jkowalski",
+     "ci_type_code": "account",
+     "is_active": true,
+     "snapshot": true,
+     "current_identifier": "ADM-JKOWALSKI",
+     "current_name": "Konto administracyjne adm.jkowalski",
+     "owner": null,
+     "consented": false
+    }
+   ],
+   "requested_by": {
+    "id": "49561563-057e-41f8-867f-711b9384f189",
+    "display_name": "Ewa Edytorska"
+   },
+   "assignee": {
+    "id": "49561563-057e-41f8-867f-711b9384f189",
+    "display_name": "Ewa Edytorska"
+   },
+   "approver": {
+    "id": "ece4b2f9-0e39-472a-825e-3cc76b6885bd",
+    "display_name": "Jan Zatwierdzający"
+   },
+   "verifier": {
+    "id": "ece4b2f9-0e39-472a-825e-3cc76b6885bd",
+    "display_name": "Jan Zatwierdzający"
+   },
+   "window_start": "2026-11-01T06:25:15.338753Z",
+   "window_end": "2026-11-01T08:25:15.338753Z",
+   "approved_at": "2026-10-30T06:25:33.785598Z",
+   "approved_by": {
+    "id": "ece4b2f9-0e39-472a-825e-3cc76b6885bd",
+    "display_name": "Jan Zatwierdzający"
+   },
+   "auto_approved": false,
+   "implemented_at": "2026-10-30T06:25:37.868088Z",
+   "verified_at": "2026-10-30T06:25:41.966676Z",
+   "rejected_at": null,
+   "deviations": [
+    {
+     "kind": "implemented_outside_window",
+     "critical": false,
+     "message_pl": "Zmiana wdrożona poza zatwierdzonym oknem serwisowym."
+    }
+   ],
+   "created_at": "2026-10-30T06:25:11.265828Z",
+   "updated_at": "2026-10-30T06:25:41.966676Z"
+  },
+  {
+   "id": "4a5096c0-b9e3-403e-9c83-6bb701778848",
+   "company_id": "86282fd9-8f4f-4ca0-870a-8c0e20c33712",
+   "number": "CHG-ALFA-2026-0014",
+   "title": "Migracja serwera plików na nową macierz",
+   "status": "draft",
+   "change_type": "normal",
+   "risk": "high",
+   "category": {
+    "id": "bb1d09e5-eff7-4047-b8e9-d7be644b027e",
+    "code": "SRV",
+    "name": "Serwery / wirtualizacja"
+   },
+   "subcategory": {
+    "id": "b69929b1-0c01-4c44-b909-51fbfe279c77",
+    "code": "SRV-MIGR",
+    "name": "Migracja"
+   },
+   "ci": [
+    {
+     "id": "cdf9cb84-6287-44cf-89aa-dc135eb4fe97",
+     "identifier": "SRV-FS-01",
+     "name": "Serwer plików",
+     "ci_type_code": "server",
+     "is_active": true,
+     "snapshot": false,
+     "current_identifier": "SRV-FS-01",
+     "current_name": "Serwer plików",
+     "owner": null,
+     "consented": false
+    }
+   ],
+   "requested_by": {
+    "id": "49561563-057e-41f8-867f-711b9384f189",
+    "display_name": "Ewa Edytorska"
+   },
+   "assignee": {
+    "id": "49561563-057e-41f8-867f-711b9384f189",
+    "display_name": "Ewa Edytorska"
+   },
+   "approver": {
+    "id": "ece4b2f9-0e39-472a-825e-3cc76b6885bd",
+    "display_name": "Jan Zatwierdzający"
+   },
+   "verifier": {
+    "id": "ece4b2f9-0e39-472a-825e-3cc76b6885bd",
+    "display_name": "Jan Zatwierdzający"
+   },
+   "window_start": "2026-10-30T05:55:58.336954Z",
+   "window_end": "2026-10-30T07:55:58.336954Z",
+   "approved_at": null,
+   "approved_by": null,
+   "auto_approved": false,
+   "implemented_at": null,
+   "verified_at": null,
+   "rejected_at": null,
+   "deviations": [],
+   "created_at": "2026-10-29T05:55:58.336954Z",
+   "updated_at": "2026-10-29T05:55:58.336954Z"
+  },
+  {
+   "id": "601d89e0-7fd3-4696-908d-582472487ee7",
+   "company_id": "86282fd9-8f4f-4ca0-870a-8c0e20c33712",
+   "number": "CHG-ALFA-2026-0016",
+   "title": "Wymiana przełącznika dostępowego",
+   "status": "pending_approval",
+   "change_type": "normal",
+   "risk": "medium",
+   "category": {
+    "id": "a63cc13c-c0db-441a-9287-0232a8d368c9",
+    "code": "NET",
+    "name": "Sieć"
+   },
+   "subcategory": null,
+   "ci": [
+    {
+     "id": "2696b8d7-8cff-4b39-96eb-7d9d983b88b0",
+     "identifier": "SW-ACC-02",
+     "name": "Przełącznik dostępowy - piętro 2",
+     "ci_type_code": "network_device",
+     "is_active": true,
+     "snapshot": false,
+     "current_identifier": "SW-ACC-02",
+     "current_name": "Przełącznik dostępowy - piętro 2",
+     "owner": null,
+     "consented": false
+    }
+   ],
+   "requested_by": {
+    "id": "49561563-057e-41f8-867f-711b9384f189",
+    "display_name": "Ewa Edytorska"
+   },
+   "assignee": {
+    "id": "49561563-057e-41f8-867f-711b9384f189",
+    "display_name": "Ewa Edytorska"
+   },
+   "approver": {
+    "id": "ece4b2f9-0e39-472a-825e-3cc76b6885bd",
+    "display_name": "Jan Zatwierdzający"
+   },
+   "verifier": {
+    "id": "ece4b2f9-0e39-472a-825e-3cc76b6885bd",
+    "display_name": "Jan Zatwierdzający"
+   },
+   "window_start": "2026-10-30T05:55:58.336954Z",
+   "window_end": "2026-10-30T07:55:58.336954Z",
+   "approved_at": null,
+   "approved_by": null,
+   "auto_approved": false,
+   "implemented_at": null,
+   "verified_at": null,
+   "rejected_at": null,
+   "deviations": [],
+   "created_at": "2026-10-29T05:55:58.336954Z",
+   "updated_at": "2026-10-30T05:55:58.339863Z"
+  },
+  {
+   "id": "76083514-0982-484e-ac3b-94255806ae5d",
+   "company_id": "86282fd9-8f4f-4ca0-870a-8c0e20c33712",
+   "number": "CHG-ALFA-2026-0013",
+   "title": "Reguła NAT dla nowego partnera EDI",
+   "status": "draft",
+   "change_type": "normal",
+   "risk": "medium",
+   "category": {
+    "id": "f27360a6-7333-476a-b47b-a541c5dcbe8c",
+    "code": "FW",
+    "name": "Firewall / sieć"
+   },
+   "subcategory": {
+    "id": "4996b554-41ed-41cf-a7ca-86f379772f2e",
+    "code": "FW-NAT",
+    "name": "NAT"
+   },
+   "ci": [
+    {
+     "id": "14dce7ce-0c16-4a09-840c-af1735c98027",
+     "identifier": "FW-02",
+     "name": "Zapora strefy DMZ",
+     "ci_type_code": "firewall",
+     "is_active": true,
+     "snapshot": false,
+     "current_identifier": "FW-02",
+     "current_name": "Zapora strefy DMZ",
+     "owner": {
+      "id": "ece4b2f9-0e39-472a-825e-3cc76b6885bd",
+      "display_name": "Jan Zatwierdzający"
+     },
+     "consented": false
+    }
+   ],
+   "requested_by": {
+    "id": "49561563-057e-41f8-867f-711b9384f189",
+    "display_name": "Ewa Edytorska"
+   },
+   "assignee": {
+    "id": "49561563-057e-41f8-867f-711b9384f189",
+    "display_name": "Ewa Edytorska"
+   },
+   "approver": {
+    "id": "ece4b2f9-0e39-472a-825e-3cc76b6885bd",
+    "display_name": "Jan Zatwierdzający"
+   },
+   "verifier": {
+    "id": "ece4b2f9-0e39-472a-825e-3cc76b6885bd",
+    "display_name": "Jan Zatwierdzający"
+   },
+   "window_start": "2026-10-29T05:55:58.336954Z",
+   "window_end": "2026-10-29T07:55:58.336954Z",
+   "approved_at": null,
+   "approved_by": null,
+   "auto_approved": false,
+   "implemented_at": null,
+   "verified_at": null,
+   "rejected_at": null,
+   "deviations": [],
+   "created_at": "2026-10-28T05:55:58.336954Z",
+   "updated_at": "2026-10-30T05:55:58.339863Z"
+  },
+  {
+   "id": "8d8f15c4-8b23-4ff8-92ab-3ee45829c213",
+   "company_id": "86282fd9-8f4f-4ca0-870a-8c0e20c33712",
+   "number": "CHG-ALFA-2026-0012",
+   "title": "Odnowienie certyfikatu portalu ERP",
+   "status": "pending_approval",
+   "change_type": "normal",
+   "risk": "medium",
+   "category": {
+    "id": "78daffa2-2e13-47c3-aa2f-c6df8b771261",
+    "code": "SEC",
+    "name": "Bezpieczeństwo"
+   },
+   "subcategory": {
+    "id": "13e9749d-5fb7-40f3-a81a-c6cf68278f17",
+    "code": "SEC-CERT",
+    "name": "Certyfikaty"
+   },
+   "ci": [
+    {
+     "id": "a6ef2b32-2206-47e1-bca0-9ea371080922",
+     "identifier": "APP-ERP",
+     "name": "System ERP",
+     "ci_type_code": "application",
+     "is_active": true,
+     "snapshot": false,
+     "current_identifier": "APP-ERP",
+     "current_name": "System ERP",
+     "owner": {
+      "id": "49561563-057e-41f8-867f-711b9384f189",
+      "display_name": "Ewa Edytorska"
+     },
+     "consented": false
+    }
+   ],
+   "requested_by": {
+    "id": "49561563-057e-41f8-867f-711b9384f189",
+    "display_name": "Ewa Edytorska"
+   },
+   "assignee": {
+    "id": "49561563-057e-41f8-867f-711b9384f189",
+    "display_name": "Ewa Edytorska"
+   },
+   "approver": {
+    "id": "ece4b2f9-0e39-472a-825e-3cc76b6885bd",
+    "display_name": "Jan Zatwierdzający"
+   },
+   "verifier": {
+    "id": "ece4b2f9-0e39-472a-825e-3cc76b6885bd",
+    "display_name": "Jan Zatwierdzający"
+   },
+   "window_start": "2026-10-29T05:55:58.336954Z",
+   "window_end": "2026-10-29T07:55:58.336954Z",
+   "approved_at": null,
+   "approved_by": null,
+   "auto_approved": false,
+   "implemented_at": null,
+   "verified_at": null,
+   "rejected_at": null,
+   "deviations": [],
+   "created_at": "2026-10-28T05:55:58.336954Z",
+   "updated_at": "2026-10-30T05:55:58.339863Z"
+  },
+  {
+   "id": "859a5f34-7976-4260-ad7a-35026abb8017",
+   "company_id": "86282fd9-8f4f-4ca0-870a-8c0e20c33712",
+   "number": "CHG-ALFA-2026-0006",
+   "title": "Dodanie użytkownika do grupy Księgowość",
+   "status": "approved",
+   "change_type": "standard",
+   "risk": "low",
+   "category": {
+    "id": "c9c27fd0-9098-4fe9-8296-786cc9241053",
+    "code": "ACC",
+    "name": "Konta i uprawnienia"
+   },
+   "subcategory": {
+    "id": "32571609-5df0-4526-81dd-03de1712b4cf",
+    "code": "ACC-GROUP",
+    "name": "Zmiana grupy"
+   },
+   "ci": [
+    {
+     "id": "12902e5a-79a4-4c7f-a1b4-0554d7fd98e6",
+     "identifier": "GRP-DOMAIN-ADMINS",
+     "name": "Grupa Domain Admins",
+     "ci_type_code": "group",
+     "is_active": true,
+     "snapshot": false,
+     "current_identifier": "GRP-DOMAIN-ADMINS",
+     "current_name": "Grupa Domain Admins",
+     "owner": null,
+     "consented": false
+    }
+   ],
+   "requested_by": {
+    "id": "49561563-057e-41f8-867f-711b9384f189",
+    "display_name": "Ewa Edytorska"
+   },
+   "assignee": {
+    "id": "49561563-057e-41f8-867f-711b9384f189",
+    "display_name": "Ewa Edytorska"
+   },
+   "approver": {
+    "id": "ece4b2f9-0e39-472a-825e-3cc76b6885bd",
+    "display_name": "Jan Zatwierdzający"
+   },
+   "verifier": {
+    "id": "ece4b2f9-0e39-472a-825e-3cc76b6885bd",
+    "display_name": "Jan Zatwierdzający"
+   },
+   "window_start": "2026-10-28T05:55:58.336954Z",
+   "window_end": "2026-10-28T07:55:58.336954Z",
+   "approved_at": "2026-10-27T06:55:58.336954Z",
+   "approved_by": null,
+   "auto_approved": true,
+   "implemented_at": null,
+   "verified_at": null,
+   "rejected_at": null,
+   "deviations": [],
+   "created_at": "2026-10-27T05:55:58.336954Z",
+   "updated_at": "2026-10-30T05:55:58.339863Z"
+  },
+  {
+   "id": "a478bab5-d148-4c2e-98c8-a18876ef0725",
+   "company_id": "86282fd9-8f4f-4ca0-870a-8c0e20c33712",
+   "number": "CHG-ALFA-2026-0011",
+   "title": "Polityka haseł: 14 znaków",
+   "status": "approved",
+   "change_type": "normal",
+   "risk": "medium",
+   "category": {
+    "id": "5b65f1dc-1ff9-4381-b4b9-e638fc884712",
+    "code": "GPO",
+    "name": "Polityki domenowe"
+   },
+   "subcategory": {
+    "id": "a0978c8a-e880-4200-8cc3-0d588c9ff18a",
+    "code": "GPO-PWD",
+    "name": "Polityki haseł"
+   },
+   "ci": [
+    {
+     "id": "12902e5a-79a4-4c7f-a1b4-0554d7fd98e6",
+     "identifier": "GRP-DOMAIN-ADMINS",
+     "name": "Grupa Domain Admins",
+     "ci_type_code": "group",
+     "is_active": true,
+     "snapshot": false,
+     "current_identifier": "GRP-DOMAIN-ADMINS",
+     "current_name": "Grupa Domain Admins",
+     "owner": null,
+     "consented": false
+    }
+   ],
+   "requested_by": {
+    "id": "49561563-057e-41f8-867f-711b9384f189",
+    "display_name": "Ewa Edytorska"
+   },
+   "assignee": {
+    "id": "49561563-057e-41f8-867f-711b9384f189",
+    "display_name": "Ewa Edytorska"
+   },
+   "approver": {
+    "id": "ece4b2f9-0e39-472a-825e-3cc76b6885bd",
+    "display_name": "Jan Zatwierdzający"
+   },
+   "verifier": {
+    "id": "ece4b2f9-0e39-472a-825e-3cc76b6885bd",
+    "display_name": "Jan Zatwierdzający"
+   },
+   "window_start": "2026-10-27T05:55:58.336954Z",
+   "window_end": "2026-10-27T07:55:58.336954Z",
+   "approved_at": "2026-10-26T07:55:58.336954Z",
+   "approved_by": {
+    "id": "ece4b2f9-0e39-472a-825e-3cc76b6885bd",
+    "display_name": "Jan Zatwierdzający"
+   },
+   "auto_approved": false,
+   "implemented_at": null,
+   "verified_at": null,
+   "rejected_at": null,
+   "deviations": [],
+   "created_at": "2026-10-26T05:55:58.336954Z",
+   "updated_at": "2026-10-30T05:55:58.339863Z"
+  },
+  {
+   "id": "af6ce701-b743-428b-ae8a-d169dc1cc7cc",
+   "company_id": "86282fd9-8f4f-4ca0-870a-8c0e20c33712",
+   "number": "CHG-ALFA-2026-0004",
+   "title": "Wyłączenie podatnego protokołu SMBv1",
+   "status": "implemented",
+   "change_type": "emergency",
+   "risk": "high",
+   "category": {
+    "id": "78daffa2-2e13-47c3-aa2f-c6df8b771261",
+    "code": "SEC",
+    "name": "Bezpieczeństwo"
+   },
+   "subcategory": null,
+   "ci": [
+    {
+     "id": "cdf9cb84-6287-44cf-89aa-dc135eb4fe97",
+     "identifier": "SRV-FS-01",
+     "name": "Serwer plików",
+     "ci_type_code": "server",
+     "is_active": true,
+     "snapshot": true,
+     "current_identifier": "SRV-FS-01",
+     "current_name": "Serwer plików",
+     "owner": null,
+     "consented": false
+    }
+   ],
+   "requested_by": {
+    "id": "49561563-057e-41f8-867f-711b9384f189",
+    "display_name": "Ewa Edytorska"
+   },
+   "assignee": {
+    "id": "49561563-057e-41f8-867f-711b9384f189",
+    "display_name": "Ewa Edytorska"
+   },
+   "approver": {
+    "id": "ece4b2f9-0e39-472a-825e-3cc76b6885bd",
+    "display_name": "Jan Zatwierdzający"
+   },
+   "verifier": {
+    "id": "ece4b2f9-0e39-472a-825e-3cc76b6885bd",
+    "display_name": "Jan Zatwierdzający"
+   },
+   "window_start": "2026-10-24T05:25:58.336954Z",
+   "window_end": "2026-10-24T07:55:58.336954Z",
+   "approved_at": null,
+   "approved_by": null,
+   "auto_approved": false,
+   "implemented_at": "2026-10-24T06:55:58.336954Z",
+   "verified_at": null,
+   "rejected_at": null,
+   "deviations": [
+    {
+     "kind": "emergency_not_approved_in_24h",
+     "critical": false,
+     "message_pl": "Zmiana awaryjna nie została zatwierdzona w ciągu 24 h od wdrożenia."
+    },
+    {
+     "kind": "implemented_not_verified",
+     "critical": false,
+     "message_pl": "Zmiana wdrożona bez weryfikacji."
+    }
+   ],
+   "created_at": "2026-10-24T05:55:58.336954Z",
+   "updated_at": "2026-10-30T05:55:58.339863Z"
+  },
+  {
+   "id": "a5cd2d5e-6dda-4a8f-ba7a-70e4de2c2306",
+   "company_id": "86282fd9-8f4f-4ca0-870a-8c0e20c33712",
+   "number": "CHG-ALFA-2026-0015",
+   "title": "Test odtworzenia kopii kontrolera domeny",
+   "status": "cancelled",
+   "change_type": "normal",
+   "risk": "low",
+   "category": {
+    "id": "c37bdfac-1fe6-4dc7-ab83-2443882952f7",
+    "code": "BKP",
+    "name": "Kopie zapasowe"
+   },
+   "subcategory": {
+    "id": "a3472d03-426c-4e0d-87f0-947394b5a477",
+    "code": "BKP-TEST",
+    "name": "Odtworzenie testowe"
+   },
+   "ci": [
+    {
+     "id": "e5fea9ac-d76f-4636-8742-4e7f6098f2d9",
+     "identifier": "SRV-DC-01",
+     "name": "Kontroler domeny",
+     "ci_type_code": "server",
+     "is_active": true,
+     "snapshot": false,
+     "current_identifier": "SRV-DC-01",
+     "current_name": "Kontroler domeny",
+     "owner": {
+      "id": "49561563-057e-41f8-867f-711b9384f189",
+      "display_name": "Ewa Edytorska"
+     },
+     "consented": false
+    }
+   ],
+   "requested_by": {
+    "id": "49561563-057e-41f8-867f-711b9384f189",
+    "display_name": "Ewa Edytorska"
+   },
+   "assignee": {
+    "id": "49561563-057e-41f8-867f-711b9384f189",
+    "display_name": "Ewa Edytorska"
+   },
+   "approver": {
+    "id": "ece4b2f9-0e39-472a-825e-3cc76b6885bd",
+    "display_name": "Jan Zatwierdzający"
+   },
+   "verifier": {
+    "id": "ece4b2f9-0e39-472a-825e-3cc76b6885bd",
+    "display_name": "Jan Zatwierdzający"
+   },
+   "window_start": "2026-10-22T05:55:58.336954Z",
+   "window_end": "2026-10-22T07:55:58.336954Z",
+   "approved_at": null,
+   "approved_by": null,
+   "auto_approved": false,
+   "implemented_at": null,
+   "verified_at": null,
+   "rejected_at": null,
+   "deviations": [],
+   "created_at": "2026-10-21T05:55:58.336954Z",
+   "updated_at": "2026-10-30T05:55:58.339863Z"
+  }
+ ],
+ "total": 18,
+ "limit": 10,
+ "offset": 0
+}

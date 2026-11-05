@@ -1,0 +1,26 @@
+{
+ "type": "urn:rejestr:problem:attachment.type_not_allowed",
+ "title": "Nieobsługiwany typ danych",
+ "status": 415,
+ "detail": "Niedozwolony typ pliku (program Windows). Dozwolone typy załączników: CSV, DOCX, EML (e-mail), JPEG, JSON, MSG (Outlook), ODS, ODT, PDF, PNG, XLSX, XML, ZIP, tekst.",
+ "code": "attachment.type_not_allowed",
+ "instance": "/api/v1/companies/86282fd9-8f4f-4ca0-870a-8c0e20c33712/changes/4a5096c0-b9e3-403e-9c83-6bb701778848/attachments",
+ "request_id": "7d0c1d52-31f4-4c1b-8d55-0b3e5b6a9c21",
+ "detected_type": "application/x-msdownload",
+ "allowed_types": [
+  "application/json",
+  "application/pdf",
+  "application/vnd.ms-outlook",
+  "application/vnd.oasis.opendocument.spreadsheet",
+  "application/vnd.oasis.opendocument.text",
+  "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet",
+  "application/vnd.openxmlformats-officedocument.wordprocessingml.document",
+  "application/xml",
+  "application/zip",
+  "image/jpeg",
+  "image/png",
+  "message/rfc822",
+  "text/csv",
+  "text/plain"
+ ]
+}

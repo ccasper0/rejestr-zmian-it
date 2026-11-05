@@ -1,0 +1,9 @@
+{
+ "access_token": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiJsb2NhbDp4In0.c2lnbmF0dXJl",
+ "token_type": "Bearer",
+ "expires_in": 900,
+ "refresh_token": "Yq3v8Jt2pX0bS4mN6kR1wE9uZ7aC5dF2hG8jL0nQ4sT",
+ "refresh_expires_in": 7200,
+ "session_expires_at": "2026-11-03T20:00:00Z",
+ "must_change_password": false
+}
