@@ -1,6 +1,8 @@
 # Rejestr zmian IT
 
 [![License: Apache-2.0](https://img.shields.io/badge/License-Apache_2.0-blue.svg)](LICENSE)
+[![CI](https://github.com/ccasper0/rejestr-zmian-it/actions/workflows/ci.yml/badge.svg)](https://github.com/ccasper0/rejestr-zmian-it/actions/workflows/ci.yml)
+[![Release](https://img.shields.io/github/v/release/ccasper0/rejestr-zmian-it)](https://github.com/ccasper0/rejestr-zmian-it/releases)
 
 > **English summary.** A web application for registering, approving,
 > monitoring and auditing administrative changes in the IT infrastructure of
@@ -51,6 +53,22 @@ Dokumentacja dla użytkowników:
 - **[docs/funkcjonalnosci.md](docs/funkcjonalnosci.md)** — lista
   funkcjonalności z odwołaniami do ISO/IEC 27001:2022 i ADR oraz
   ograniczeniami.
+
+## Zrzuty ekranu
+
+Zrzuty z uruchomienia referencyjnego (`docker compose up --build` +
+`python -m app.cli seed`, `AUTH_MODE=dev`); dane przykładowe spółek
+ALFA/BETA/GAMMA.
+
+| Rejestr zmian | Karta zmiany |
+|---------------|--------------|
+| ![Rejestr zmian](docs/img/rejestr-zmian.png) | ![Karta zmiany](docs/img/karta-zmiany.png) |
+
+| Dziennik audytu (znacznik spójności łańcucha) | Raporty i eksport |
+|-----------------------------------------------|-------------------|
+| ![Dziennik audytu](docs/img/dziennik-audytu.png) | ![Raporty i eksport](docs/img/raporty.png) |
+
+*Screenshots from a reference run with seeded sample data; the UI is in Polish.*
 
 ## Architektura
 
